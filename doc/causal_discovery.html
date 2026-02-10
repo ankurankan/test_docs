@@ -51,6 +51,10 @@
 
     
     
+      
+        <meta  content="Learn causal graphs from data using constraint- and score-based structure learning in pgmpy."  name="description" >
+      
+    
     
   
   <!-- SEO meta tags -->
@@ -78,6 +82,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +113,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -138,7 +165,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#algorithms" class="md-skip">
+        <a href="#example" class="md-skip">
           Skip to content
         </a>
       
@@ -546,10 +573,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#algorithms" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="/doc/causal_discovery.rst#algorithms (reference label)"><span>Algorithms</span></span>
+      <span title="/doc/causal_discovery.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -569,7 +596,17 @@
   <a href="#scoring-functions" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="scoring functions (reference label)"><span>Scoring Functions</span></span>
+      <span title="/doc/causal_discovery.rst#scoring-functions (reference label)"><span>Scoring Functions</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/causal_discovery.rst#algorithms (reference label)"><span>Algorithms</span></span>
     </span>
   </a>
   
@@ -760,6 +797,30 @@
   
   
     <li class="md-nav__item">
+      <a href="simulations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/doc/simulations.rst (reference label)"><span>Simulations</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="io.html" class="md-nav__link">
         
   
@@ -903,10 +964,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#algorithms" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="/doc/causal_discovery.rst#algorithms (reference label)"><span>Algorithms</span></span>
+      <span title="/doc/causal_discovery.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -926,7 +987,17 @@
   <a href="#scoring-functions" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="scoring functions (reference label)"><span>Scoring Functions</span></span>
+      <span title="/doc/causal_discovery.rst#scoring-functions (reference label)"><span>Scoring Functions</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/causal_discovery.rst#algorithms (reference label)"><span>Algorithms</span></span>
     </span>
   </a>
   
@@ -950,62 +1021,24 @@
 
 
 <h1 id="causal-discovery-and-structure-learning">Causal Discovery and Structure Learning<a class="headerlink" href="#causal-discovery-and-structure-learning" title="Link to this heading">¶</a></h1>
-<p>Causal discovery (also known as structure learning) is the task of learning the
-structure of a Directed Acyclic Graph (DAG) or its equivalence class from
-observational data. The learned graph encodes conditional independence
-relationships and, under certain assumptions, causal relationships between
-variables.</p>
-<p>pgmpy provides two main families of algorithms:</p>
-<ul class="simple">
-<li><p><strong>Constraint-based</strong> methods test conditional independencies in the data to
-build the graph skeleton and orient edges (e.g., PC).</p></li>
-<li><p><strong>Score-based</strong> methods search the space of possible graphs and optimize a
-scoring criterion (e.g., Hill-Climb, GES).</p></li>
-</ul>
-<h2 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
-<table class="docutils data align-default">
-<colgroup>
-<col style="width: 30.0%" />
-<col style="width: 20.0%" />
-<col style="width: 50.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Algorithm</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>API Reference</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>PC</p></td>
-<td><p>Constraint-based</p></td>
-<td><p><a class="reference internal" href="../structure_estimator/pc.html#pgmpy.estimators.PC" title="pgmpy.estimators.PC.PC (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.PC.PC</span></code></a></p></td>
-</tr>
-<tr class="row-odd"><td><p>Hill-Climb Search</p></td>
-<td><p>Score-based</p></td>
-<td><p><a class="reference internal" href="../structure_estimator/hill.html#pgmpy.estimators.HillClimbSearch" title="pgmpy.estimators.HillClimbSearch.HillClimbSearch (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.HillClimbSearch.HillClimbSearch</span></code></a></p></td>
-</tr>
-<tr class="row-even"><td><p>Greedy Equivalence Search (GES)</p></td>
-<td><p>Score-based</p></td>
-<td><p><a class="reference internal" href="../structure_estimator/ges.html#pgmpy.estimators.GES" title="pgmpy.estimators.GES.GES (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.GES.GES</span></code></a></p></td>
-</tr>
-<tr class="row-odd"><td><p>Tree Search</p></td>
-<td><p>Score-based</p></td>
-<td><p><a class="reference internal" href="../structure_estimator/tree.html#pgmpy.estimators.TreeSearch" title="pgmpy.estimators.TreeSearch.TreeSearch (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.TreeSearch.TreeSearch</span></code></a></p></td>
-</tr>
-<tr class="row-even"><td><p>Exhaustive Search</p></td>
-<td><p>Score-based</p></td>
-<td><p><a class="reference internal" href="../structure_estimator/exhaustive.html#pgmpy.estimators.ExhaustiveSearch" title="pgmpy.estimators.ExhaustiveSearch.ExhaustiveSearch (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.ExhaustiveSearch.ExhaustiveSearch</span></code></a></p></td>
-</tr>
-<tr class="row-odd"><td><p>Max-Min Hill-Climb (MMHC)</p></td>
-<td><p>Hybrid</p></td>
-<td><p><a class="reference internal" href="../structure_estimator/mmhc.html#pgmpy.estimators.MmhcEstimator" title="pgmpy.estimators.MmhcEstimator.MmhcEstimator (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.MmhcEstimator.MmhcEstimator</span></code></a></p></td>
-</tr>
-<tr class="row-even"><td><p>Expert In The Loop</p></td>
-<td><p>Interactive</p></td>
-<td><p><a class="reference internal" href="../structure_estimator/expert.html#pgmpy.estimators.ExpertInLoop" title="pgmpy.estimators.expert.ExpertInLoop (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.expert.ExpertInLoop</span></code></a></p></td>
-</tr>
-</tbody>
-</table>
+<p>Causal discovery (structure learning) finds which variables influence others
+by learning a directed graph from data.</p>
+<p>In more precise terms, we seek a directed acyclic graph (DAG) <span class="math notranslate nohighlight">\(G\)</span> over
+variables <span class="math notranslate nohighlight">\(X\)</span> that either satisfies conditional independencies like
+<span class="math notranslate nohighlight">\(X \perp Y \mid Z\)</span> (constraint-based) or maximizes a score <span class="math notranslate nohighlight">\(S(G; D)\)</span>
+(score-based) for data <span class="math notranslate nohighlight">\(D\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[G^* = \arg\max_G S(G; D)\]</div>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.estimators</span><span class="w"> </span><span class="kn">import</span> <span class="n">HillClimbSearch</span><span class="p">,</span> <span class="n">BIC</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;sachs_discrete&quot;</span><span class="p">)</span>
+<span class="n">hc</span> <span class="o">=</span> <span class="n">HillClimbSearch</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">hc</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">scoring_method</span><span class="o">=</span><span class="n">BIC</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</code></pre></div>
+</div>
 <h2 id="conditional-independence-tests">Conditional Independence Tests<a class="headerlink" href="#conditional-independence-tests" title="Link to this heading">¶</a></h2>
 <p>Constraint-based algorithms rely on conditional independence (CI) tests to
 determine the graph structure. pgmpy provides the following CI tests:</p>
@@ -1068,6 +1101,50 @@ structures. Available scoring functions:</p>
 </tr>
 <tr class="row-even"><td><p>BICGauss / AICGauss</p></td>
 <td><p>Information-theoretic scores for Gaussian models</p></td>
+</tr>
+</tbody>
+</table>
+<h2 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<table class="docutils data align-default">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 20.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Algorithm</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>API Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PC</p></td>
+<td><p>Constraint-based</p></td>
+<td><p><a class="reference internal" href="../structure_estimator/pc.html#pgmpy.estimators.PC" title="pgmpy.estimators.PC.PC (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.PC.PC</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Hill-Climb Search</p></td>
+<td><p>Score-based</p></td>
+<td><p><a class="reference internal" href="../structure_estimator/hill.html#pgmpy.estimators.HillClimbSearch" title="pgmpy.estimators.HillClimbSearch.HillClimbSearch (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.HillClimbSearch.HillClimbSearch</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Greedy Equivalence Search (GES)</p></td>
+<td><p>Score-based</p></td>
+<td><p><a class="reference internal" href="../structure_estimator/ges.html#pgmpy.estimators.GES" title="pgmpy.estimators.GES.GES (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.GES.GES</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Tree Search</p></td>
+<td><p>Score-based</p></td>
+<td><p><a class="reference internal" href="../structure_estimator/tree.html#pgmpy.estimators.TreeSearch" title="pgmpy.estimators.TreeSearch.TreeSearch (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.TreeSearch.TreeSearch</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Exhaustive Search</p></td>
+<td><p>Score-based</p></td>
+<td><p><a class="reference internal" href="../structure_estimator/exhaustive.html#pgmpy.estimators.ExhaustiveSearch" title="pgmpy.estimators.ExhaustiveSearch.ExhaustiveSearch (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.ExhaustiveSearch.ExhaustiveSearch</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Max-Min Hill-Climb (MMHC)</p></td>
+<td><p>Hybrid</p></td>
+<td><p><a class="reference internal" href="../structure_estimator/mmhc.html#pgmpy.estimators.MmhcEstimator" title="pgmpy.estimators.MmhcEstimator.MmhcEstimator (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.MmhcEstimator.MmhcEstimator</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Expert In The Loop</p></td>
+<td><p>Interactive</p></td>
+<td><p><a class="reference internal" href="../structure_estimator/expert.html#pgmpy.estimators.ExpertInLoop" title="pgmpy.estimators.expert.ExpertInLoop (Python class)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pgmpy.estimators.expert.ExpertInLoop</span></code></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1174,6 +1251,8 @@ structures. Available scoring functions:</p>
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

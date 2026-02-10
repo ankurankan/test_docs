@@ -78,6 +78,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +109,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -2083,11 +2106,11 @@
 <dd><p>Base class for representing Cluster Graph.</p>
 <p>Cluster graph is an undirected graph which is associated with a subset of variables. The graph contains undirected
 edges that connects clusters whose scopes have a non-empty intersection.</p>
-<p>Formally, a cluster graph is  <span class="math">\mathcal{U}</span> for a set of factors <span class="math">\Phi</span> over <span class="math">\mathcal{X}</span> is an
-undirected graph, each of whose nodes <span class="math">i</span> is associated with a subset <span class="math">C_i \subseteq X</span>. A cluster
-graph must be family-preserving - each factor <span class="math">\phi \in \Phi</span> must be associated with a cluster C, denoted
-<span class="math">\alpha(\phi)</span>, such that <span class="math">Scope[\phi] \subseteq C_i</span>. Each edge between a pair of clusters <span class="math">C_i</span>
-and <span class="math">C_j</span> is associated with a sepset <span class="math">S_{i,j} \subseteq C_i \cap C_j</span>.</p>
+<p>Formally, a cluster graph is  <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> for a set of factors <span class="math notranslate nohighlight">\(\Phi\)</span> over <span class="math notranslate nohighlight">\(\mathcal{X}\)</span> is an
+undirected graph, each of whose nodes <span class="math notranslate nohighlight">\(i\)</span> is associated with a subset <span class="math notranslate nohighlight">\(C_i \subseteq X\)</span>. A cluster
+graph must be family-preserving - each factor <span class="math notranslate nohighlight">\(\phi \in \Phi\)</span> must be associated with a cluster C, denoted
+<span class="math notranslate nohighlight">\(\alpha(\phi)\)</span>, such that <span class="math notranslate nohighlight">\(Scope[\phi] \subseteq C_i\)</span>. Each edge between a pair of clusters <span class="math notranslate nohighlight">\(C_i\)</span>
+and <span class="math notranslate nohighlight">\(C_j\)</span> is associated with a sepset <span class="math notranslate nohighlight">\(S_{i,j} \subseteq C_i \cap C_j\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="pgmpy.models.ClusterGraph.ClusterGraph-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#pgmpy.models.ClusterGraph.ClusterGraph-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
@@ -2367,9 +2390,9 @@ given node.</p>
 <span class="sig-name descname"><span class="pre">get_partition_function</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pgmpy/models/ClusterGraph.html#ClusterGraph.get_partition_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pgmpy.models.ClusterGraph.ClusterGraph.get_partition_function" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the partition function for a given undirected graph.</p>
 <p>A partition function is defined as</p>
-<div class="math">
-<p><span class="math">\sum_{X}(\prod_{i=1}^{m} \phi_i)</span></p>
-</div><p>where m is the number of factors present in the graph
+<div class="math notranslate nohighlight">
+\[\sum_{X}(\prod_{i=1}^{m} \phi_i)\]</div>
+<p>where m is the number of factors present in the graph
 and X are all the random variables present.</p>
 <p class="example rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClusterGraph</span>
@@ -2510,6 +2533,8 @@ and X are all the random variables present.</p>
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

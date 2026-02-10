@@ -79,6 +79,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -105,13 +110,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -574,7 +597,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="parameter estimation (reference label)"><span>Parameter Estimation</span></span>
+    <span title="/examples.rst#parameter-estimation (reference label)"><span>Parameter Estimation</span></span>
     
   </span>
   
@@ -598,7 +621,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="probabilistic inference (reference label)"><span>Probabilistic Inference</span></span>
+    <span title="/examples.rst#probabilistic-inference (reference label)"><span>Probabilistic Inference</span></span>
     
   </span>
   
@@ -1827,7 +1850,7 @@ array([ True, False,  True,  True,  True,  True,  True,  True,  True,
 <img alt="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_1._Introduction_to_Probabilistic_Graphical_Models_20_0.png" src="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_1._Introduction_to_Probabilistic_Graphical_Models_20_0.png" />
 </div>
 </div>
-<p>In this case the parameters of the network would be <span class="math">P(L)</span>, <span class="math">P(W)</span> and <span class="math">P(T | L, W)</span>. So, we will need to store 5 values for <span class="math">L</span>, 3 values for <span class="math">W</span> and 45 values for <span class="math">P(T | L, W)</span>. So, a total of 45 + 5 + 3 = 53 values to completely parameterize the network which is actually more than 45 values which we need for <span class="math">P (T, L, W)</span>. But in the cases of bigger networks graphical models help in saving space. We can take the example of the student network shown
+<p>In this case the parameters of the network would be <span class="math notranslate nohighlight">\(P(L)\)</span>, <span class="math notranslate nohighlight">\(P(W)\)</span> and <span class="math notranslate nohighlight">\(P(T | L, W)\)</span>. So, we will need to store 5 values for <span class="math notranslate nohighlight">\(L\)</span>, 3 values for <span class="math notranslate nohighlight">\(W\)</span> and 45 values for <span class="math notranslate nohighlight">\(P(T | L, W)\)</span>. So, a total of 45 + 5 + 3 = 53 values to completely parameterize the network which is actually more than 45 values which we need for <span class="math notranslate nohighlight">\(P (T, L, W)\)</span>. But in the cases of bigger networks graphical models help in saving space. We can take the example of the student network shown
 below:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[13]:
@@ -1845,12 +1868,12 @@ below:</p>
 <img alt="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_1._Introduction_to_Probabilistic_Graphical_Models_22_0.png" src="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_1._Introduction_to_Probabilistic_Graphical_Models_22_0.png" />
 </div>
 </div>
-<p>Considering that <span class="math">D</span> has cardinality of 2, <span class="math">I</span> has cardinality of 2, <span class="math">S</span> has cardinality of 2, <span class="math">G</span> has cardinality of 3 and <span class="math">L</span> has cardinality of 2. Also the parameters in this network would be <span class="math">P(D)</span>, <span class="math">P(I)</span>, <span class="math">P(S | I)</span>, <span class="math">P(G | D, I)</span>, <span class="math">P(L | G)</span>. So, the number of values needed would be 2 for <span class="math">P(D)</span>, 2 for <span class="math">P(I)</span>, 12 for <span class="math">P(G | D, I)</span>, 6 for <span class="math">P(L | G)</span>, 4 for <span class="math">P(S | I)</span>, total of 4 + 6 + 12 + 2 + 2 = 26
+<p>Considering that <span class="math notranslate nohighlight">\(D\)</span> has cardinality of 2, <span class="math notranslate nohighlight">\(I\)</span> has cardinality of 2, <span class="math notranslate nohighlight">\(S\)</span> has cardinality of 2, <span class="math notranslate nohighlight">\(G\)</span> has cardinality of 3 and <span class="math notranslate nohighlight">\(L\)</span> has cardinality of 2. Also the parameters in this network would be <span class="math notranslate nohighlight">\(P(D)\)</span>, <span class="math notranslate nohighlight">\(P(I)\)</span>, <span class="math notranslate nohighlight">\(P(S | I)\)</span>, <span class="math notranslate nohighlight">\(P(G | D, I)\)</span>, <span class="math notranslate nohighlight">\(P(L | G)\)</span>. So, the number of values needed would be 2 for <span class="math notranslate nohighlight">\(P(D)\)</span>, 2 for <span class="math notranslate nohighlight">\(P(I)\)</span>, 12 for <span class="math notranslate nohighlight">\(P(G | D, I)\)</span>, 6 for <span class="math notranslate nohighlight">\(P(L | G)\)</span>, 4 for <span class="math notranslate nohighlight">\(P(S | I)\)</span>, total of 4 + 6 + 12 + 2 + 2 = 26
 compared to 2 * 2 * 3 * 2 * 2 = 48 required for the Joint Distribution over all the variables.</p>
 <h4 id="Types-of-Graphical-Models">Types of Graphical Models<a class="headerlink" href="#Types-of-Graphical-Models" title="Link to this heading">¶</a></h4>
 <p>There are mainly 2 types of graphical models:</p>
 <ol class="arabic simple">
-<li><p>Bayesian Models: A Bayesian Model consists of a directed graph and Conditional Probability Distributions(CPDs) associated with each of the node. Each CPD is of the form <span class="math">P(node | parents(node))</span> where <span class="math">parents(node)</span> are the parents of the node in the graph structure.</p></li>
+<li><p>Bayesian Models: A Bayesian Model consists of a directed graph and Conditional Probability Distributions(CPDs) associated with each of the node. Each CPD is of the form <span class="math notranslate nohighlight">\(P(node | parents(node))\)</span> where <span class="math notranslate nohighlight">\(parents(node)\)</span> are the parents of the node in the graph structure.</p></li>
 <li><p>Markov Models: A Markov Models consists of an undirected graph and are parameterized by Factors. Factors represent how much 2 or more variables agree with each other.</p></li>
 </ol>
 
@@ -1956,6 +1979,8 @@ compared to 2 * 2 * 3 * 2 * 2 = 48 required for the Joint Distribution over all 
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

@@ -79,6 +79,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -105,13 +110,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -574,7 +597,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="parameter estimation (reference label)"><span>Parameter Estimation</span></span>
+    <span title="/examples.rst#parameter-estimation (reference label)"><span>Parameter Estimation</span></span>
     
   </span>
   
@@ -598,7 +621,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="probabilistic inference (reference label)"><span>Probabilistic Inference</span></span>
+    <span title="/examples.rst#probabilistic-inference (reference label)"><span>Probabilistic Inference</span></span>
     
   </span>
   
@@ -1669,7 +1692,7 @@ yes     3.0   2.0    5.0   0.0
 <p>We can see, for example, that as many apples as bananas were observed and that <code class="docutils literal notranslate"><span class="pre">5</span></code> large bananas were tasty, while only <code class="docutils literal notranslate"><span class="pre">1</span></code> was not.</p>
 <h3 id="Maximum-Likelihood-Estimation">Maximum Likelihood Estimation<a class="headerlink" href="#Maximum-Likelihood-Estimation" title="Link to this heading">¶</a></h3>
 <p>A natural estimate for the CPDs is to simply use the <em>relative frequencies</em>, with which the variable states have occured. We observed <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">apples</span></code> among a total of <code class="docutils literal notranslate"><span class="pre">14</span> <span class="pre">fruits</span></code>, so we might guess that about <code class="docutils literal notranslate"><span class="pre">50%</span></code> of <code class="docutils literal notranslate"><span class="pre">fruits</span></code> are <code class="docutils literal notranslate"><span class="pre">apples</span></code>.</p>
-<p>This approach is <em>Maximum Likelihood Estimation (MLE)</em>. According to MLE, we should fill the CPDs in such a way, that <span class="math">P(\text{data}|\text{model})</span> is maximal. This is achieved when using the <em>relative frequencies</em>. See [1], section 17.1 for an introduction to ML parameter estimation. pgmpy supports MLE as follows:</p>
+<p>This approach is <em>Maximum Likelihood Estimation (MLE)</em>. According to MLE, we should fill the CPDs in such a way, that <span class="math notranslate nohighlight">\(P(\text{data}|\text{model})\)</span> is maximal. This is achieved when using the <em>relative frequencies</em>. See [1], section 17.1 for an introduction to ML parameter estimation. pgmpy supports MLE as follows:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
@@ -1826,8 +1849,8 @@ overfitting is <em>Bayesian Parameter Estimation</em>.</p>
 <p>We briefly discuss all approaches and give examples.</p>
 <p>This approach construes model selection as an optimization task. It has two building blocks:</p>
 <ul class="simple">
-<li><p>A <em>scoring function</em> <span class="math">s_D\colon M \to \mathbb R</span> that maps models to a numerical score, based on how well they fit to a given data set <span class="math">D</span>.</p></li>
-<li><p>A <em>search strategy</em> to traverse the search space of possible models <span class="math">M</span> and select a model with optimal score.</p></li>
+<li><p>A <em>scoring function</em> <span class="math notranslate nohighlight">\(s_D\colon M \to \mathbb R\)</span> that maps models to a numerical score, based on how well they fit to a given data set <span class="math notranslate nohighlight">\(D\)</span>.</p></li>
+<li><p>A <em>search strategy</em> to traverse the search space of possible models <span class="math notranslate nohighlight">\(M\)</span> and select a model with optimal score.</p></li>
 </ul>
 <h3 id="Scoring-functions">Scoring functions<a class="headerlink" href="#Scoring-functions" title="Link to this heading">¶</a></h3>
 <p>Commonly used scores to measure the fit between model and data are <em>Bayesian Dirichlet scores</em> such as <em>BDeu</em> or <em>K2</em> and the <em>Bayesian Information Criterion</em> (BIC, also called MDL). See [1], Section 18.3 for a detailed introduction on scores. As before, BDeu is dependent on an equivalent sample size.</p>
@@ -2260,6 +2283,8 @@ Part 2) Model:     [(&#39;A&#39;, &#39;H&#39;), (&#39;B&#39;, &#39;A&#39;), (&#3
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

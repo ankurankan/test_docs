@@ -79,6 +79,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -105,13 +110,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -574,7 +597,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="parameter estimation (reference label)"><span>Parameter Estimation</span></span>
+    <span title="/examples.rst#parameter-estimation (reference label)"><span>Parameter Estimation</span></span>
     
   </span>
   
@@ -614,7 +637,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="probabilistic inference (reference label)"><span>Probabilistic Inference</span></span>
+    <span title="/examples.rst#probabilistic-inference (reference label)"><span>Probabilistic Inference</span></span>
     
   </span>
   
@@ -631,7 +654,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_4">
             <span class="md-nav__icon md-icon"></span>
-            <span title="probabilistic inference (reference label)"><span>Probabilistic Inference</span></span>
+            <span title="/examples.rst#probabilistic-inference (reference label)"><span>Probabilistic Inference</span></span>
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -948,7 +971,7 @@
 <p>By intution it seems that there shouldn’t be any benefit of switching the door. But using Bayes’ Theorem we can show that by switching the door the contestant has more chances of winning.</p>
 <p>You can also checkout the wikipedia page: <a class="reference external" href="https://en.wikipedia.org/wiki/Monty_Hall_problem">https://en.wikipedia.org/wiki/Monty_Hall_problem</a></p>
 <h2 id="Probabilistic-Interpretetion:">Probabilistic Interpretetion:<a class="headerlink" href="#Probabilistic-Interpretetion:" title="Link to this heading">¶</a></h2>
-<p>So have 3 random variables Contestant <span class="math">C \in \{1, 2, 3\}</span>, Host <span class="math">H \in \{1, 2, 3\}</span> and prize <span class="math">P \in \{1, 2, 3 \}</span>. The prize has been put randomly behind the doors therefore: <span class="math">P(P=1) = P(P=2) = P(P=3) = \frac{1}{3}</span>. Also, the contestant is going to choose the door randomly, therefore: <span class="math">P(C=1) = P(C=2) = P(C=3) = \frac{1}{3}</span>. For this problem we can build a Bayesian Network structure like:</p>
+<p>So have 3 random variables Contestant <span class="math notranslate nohighlight">\(C \in \{1, 2, 3\}\)</span>, Host <span class="math notranslate nohighlight">\(H \in \{1, 2, 3\}\)</span> and prize <span class="math notranslate nohighlight">\(P \in \{1, 2, 3 \}\)</span>. The prize has been put randomly behind the doors therefore: <span class="math notranslate nohighlight">\(P(P=1) = P(P=2) = P(P=3) = \frac{1}{3}\)</span>. Also, the contestant is going to choose the door randomly, therefore: <span class="math notranslate nohighlight">\(P(C=1) = P(C=2) = P(C=3) = \frac{1}{3}\)</span>. For this problem we can build a Bayesian Network structure like:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
@@ -996,7 +1019,7 @@ P(H | P, C):
 +------+------+------+------+------+------+------+------+------+------+
 |  H=2 |  0.5 |   1  |   0  |   1  |  0.5 |   0  |   0  |   0  |   0  |
 +------+------+------+------+------+------+------+------+------+------+
-</pre><p>Let’s say that the contestant selected door 0 and the host opened door 2, we need to find the probability of the prize i.e. <span class="math">P(P|H=2, C=0)</span>.</p>
+</pre><p>Let’s say that the contestant selected door 0 and the host opened door 2, we need to find the probability of the prize i.e. <span class="math notranslate nohighlight">\(P(P|H=2, C=0)\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
@@ -1216,6 +1239,8 @@ Finding Elimination Order: : : 0it [00:00, ?it/s]
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

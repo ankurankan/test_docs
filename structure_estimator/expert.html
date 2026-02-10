@@ -78,6 +78,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +109,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -1533,7 +1556,7 @@ method instead of calling the <cite>orientation_fn</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="pgmpy.estimators.ExpertInLoop.test_all-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#pgmpy.estimators.ExpertInLoop.test_all-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="pgmpy.estimators.ExpertInLoop.test_all.dag"><span class="sig-name descname">dag</span><span class="p"> : </span><span class="desctype"><span class="desctype">pgmpy.base.DAG</span></span><a class="headerlink" href="#pgmpy.estimators.ExpertInLoop.test_all.dag" title="Permalink to this definition">¶</a></dt><dd><p>The DAG on which to run the tests.</p>
+<dt id="pgmpy.estimators.ExpertInLoop.test_all.dag"><span class="sig-name descname">dag</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../models/dag.html#pgmpy.base.DAG" title="pgmpy.base.DAG (Python class) — Directed Graphical Model, graph with vertex roles.">pgmpy.base.DAG</a></span></span><a class="headerlink" href="#pgmpy.estimators.ExpertInLoop.test_all.dag" title="Permalink to this definition">¶</a></dt><dd><p>The DAG on which to run the tests.</p>
 </dd>
 </dl>
 </dd>

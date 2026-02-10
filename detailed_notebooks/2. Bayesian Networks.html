@@ -79,6 +79,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -105,13 +110,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -574,7 +597,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="parameter estimation (reference label)"><span>Parameter Estimation</span></span>
+    <span title="/examples.rst#parameter-estimation (reference label)"><span>Parameter Estimation</span></span>
     
   </span>
   
@@ -598,7 +621,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="probabilistic inference (reference label)"><span>Probabilistic Inference</span></span>
+    <span title="/examples.rst#probabilistic-inference (reference label)"><span>Probabilistic Inference</span></span>
     
   </span>
   
@@ -1451,7 +1474,7 @@
 </ol>
 <h3 id="1.-What-are-Bayesian-Models">1. What are Bayesian Models<a class="headerlink" href="#1.-What-are-Bayesian-Models" title="Link to this heading">¶</a></h3>
 <p>A Bayesian network, Bayes network, belief network, Bayes(ian) model or probabilistic directed acyclic graphical model is a probabilistic graphical model (a type of statistical model) that represents a set of random variables and their conditional dependencies via a directed acyclic graph (DAG). Bayesian networks are mostly used when we want to represent causal relationship between the random variables. Bayesian Networks are parameterized using Conditional Probability Distributions (CPD). Each
-node in the network is parameterized using <span class="math">P(node | Pa(node))</span> where <span class="math">Pa(node)</span> represents the parents of node in the network.</p>
+node in the network is parameterized using <span class="math notranslate nohighlight">\(P(node | Pa(node))\)</span> where <span class="math notranslate nohighlight">\(Pa(node)\)</span> represents the parents of node in the network.</p>
 <p>We can take the example of the student model:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
@@ -1696,9 +1719,9 @@ True
 <p>Independencies implied by the network structure of a Bayesian Network can be categorized in 2 types:</p>
 <ol class="arabic">
 <li><p><strong>Local Independencies:</strong> Any variable in the network is independent of its non-descendents given its parents. Mathematically it can be written as:</p>
-<div class="math">
-<p><span class="math">(X \perp NonDesc(X) | Pa(X)</span></p>
-</div><p>where <span class="math">NonDesc(X)</span> is the set of variables which are not descendents of <span class="math">X</span> and <span class="math">Pa(X)</span> is the set of variables which are parents of <span class="math">X</span>.</p>
+<div class="math notranslate nohighlight">
+\[(X \perp NonDesc(X) | Pa(X)\]</div>
+<p>where <span class="math notranslate nohighlight">\(NonDesc(X)\)</span> is the set of variables which are not descendents of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Pa(X)\)</span> is the set of variables which are parents of <span class="math notranslate nohighlight">\(X\)</span>.</p>
 </li>
 <li><p><strong>Global Independencies:</strong> For discussing global independencies in Bayesian Networks we need to look at the various network structures possible. Starting with the case of 2 nodes, there are only 2 possible ways for it to be connected:</p></li>
 </ol>
@@ -1718,8 +1741,8 @@ True
 <img alt="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_2._Bayesian_Networks_13_0.png" src="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_2._Bayesian_Networks_13_0.png" />
 </div>
 </div>
-<p>In the above two cases it is fairly obvious that change in any of the node will affect the other. For the first case we can take the example of <span class="math">difficulty \rightarrow grade</span>. If we increase the difficulty of the course the probability of getting a higher grade decreases. For the second case we can take the example of <span class="math">SAT \leftarrow Intel</span>. Now if we increase the probability of getting a good score in SAT that would imply that the student is intelligent, hence increasing the
-probability of <span class="math">i_1</span>. Therefore in both the cases shown above any change in the variables leads to change in the other variable.</p>
+<p>In the above two cases it is fairly obvious that change in any of the node will affect the other. For the first case we can take the example of <span class="math notranslate nohighlight">\(difficulty \rightarrow grade\)</span>. If we increase the difficulty of the course the probability of getting a higher grade decreases. For the second case we can take the example of <span class="math notranslate nohighlight">\(SAT \leftarrow Intel\)</span>. Now if we increase the probability of getting a good score in SAT that would imply that the student is intelligent, hence increasing the
+probability of <span class="math notranslate nohighlight">\(i_1\)</span>. Therefore in both the cases shown above any change in the variables leads to change in the other variable.</p>
 <p>Now, there are four possible ways of connection between 3 nodes:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[43]:
@@ -1737,14 +1760,14 @@ probability of <span class="math">i_1</span>. Therefore in both the cases shown 
 <img alt="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_2._Bayesian_Networks_15_0.png" src="../../../pgmpy_docs/doctrees/nbsphinx/detailed_notebooks_2._Bayesian_Networks_15_0.png" />
 </div>
 </div>
-<p>Now in the above cases we will see the flow of influence from <span class="math">A</span> to <span class="math">C</span> under various cases.</p>
+<p>Now in the above cases we will see the flow of influence from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(C\)</span> under various cases.</p>
 <ol class="arabic simple">
-<li><p><strong>Causal:</strong> In the general case when we make any changes in the variable <span class="math">A</span>, it will have effect of variable <span class="math">B</span> (as we discussed above) and this change in <span class="math">B</span> will change the values in <span class="math">C</span>. One other possible case can be when <span class="math">B</span> is observed i.e. we know the value of <span class="math">B</span>. So, in this case any change in <span class="math">A</span> won’t affect <span class="math">B</span> since we already know the value. And hence there won’t be any change in <span class="math">C</span> as it depends only on <span class="math">B</span>.
-Mathematically we can say that: <span class="math">(A \perp C | B)</span>.</p></li>
-<li><p><strong>Evidential:</strong> Similarly in this case also observing <span class="math">B</span> renders <span class="math">C</span> independent of <span class="math">A</span>. Otherwise when <span class="math">B</span> is not observed the influence flows from <span class="math">A</span> to <span class="math">C</span>. Hence <span class="math">(A \perp C | B)</span>.</p></li>
-<li><p><strong>Common Evidence:</strong> This case is a bit different from the others. When <span class="math">B</span> is not observed any change in <span class="math">A</span> reflects some change in <span class="math">B</span> but not in <span class="math">C</span>. Let’s take the example of <span class="math">D \rightarrow G \leftarrow I</span>. In this case if we increase the difficulty of the course the probability of getting a higher grade reduces but this has no effect on the intelligence of the student. But when <span class="math">B</span> is observed let’s say that the student got a good grade. Now if we
-increase the difficulty of the course this will increase the probability of the student to be intelligent since we already know that he got a good grade. Hence in this case <span class="math">(A \perp C)</span> and <span class="math">( A \not\perp C | B)</span>. This structure is also commonly known as V structure.</p></li>
-<li><p><strong>Common Cause:</strong> The influence flows from <span class="math">A</span> to <span class="math">C</span> when <span class="math">B</span> is not observed. But when <span class="math">B</span> is observed and change in <span class="math">A</span> doesn’t affect <span class="math">C</span> since it’s only dependent on <span class="math">B</span>. Hence here also <span class="math">( A \perp C | B)</span>.</p></li>
+<li><p><strong>Causal:</strong> In the general case when we make any changes in the variable <span class="math notranslate nohighlight">\(A\)</span>, it will have effect of variable <span class="math notranslate nohighlight">\(B\)</span> (as we discussed above) and this change in <span class="math notranslate nohighlight">\(B\)</span> will change the values in <span class="math notranslate nohighlight">\(C\)</span>. One other possible case can be when <span class="math notranslate nohighlight">\(B\)</span> is observed i.e. we know the value of <span class="math notranslate nohighlight">\(B\)</span>. So, in this case any change in <span class="math notranslate nohighlight">\(A\)</span> won’t affect <span class="math notranslate nohighlight">\(B\)</span> since we already know the value. And hence there won’t be any change in <span class="math notranslate nohighlight">\(C\)</span> as it depends only on <span class="math notranslate nohighlight">\(B\)</span>.
+Mathematically we can say that: <span class="math notranslate nohighlight">\((A \perp C | B)\)</span>.</p></li>
+<li><p><strong>Evidential:</strong> Similarly in this case also observing <span class="math notranslate nohighlight">\(B\)</span> renders <span class="math notranslate nohighlight">\(C\)</span> independent of <span class="math notranslate nohighlight">\(A\)</span>. Otherwise when <span class="math notranslate nohighlight">\(B\)</span> is not observed the influence flows from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(C\)</span>. Hence <span class="math notranslate nohighlight">\((A \perp C | B)\)</span>.</p></li>
+<li><p><strong>Common Evidence:</strong> This case is a bit different from the others. When <span class="math notranslate nohighlight">\(B\)</span> is not observed any change in <span class="math notranslate nohighlight">\(A\)</span> reflects some change in <span class="math notranslate nohighlight">\(B\)</span> but not in <span class="math notranslate nohighlight">\(C\)</span>. Let’s take the example of <span class="math notranslate nohighlight">\(D \rightarrow G \leftarrow I\)</span>. In this case if we increase the difficulty of the course the probability of getting a higher grade reduces but this has no effect on the intelligence of the student. But when <span class="math notranslate nohighlight">\(B\)</span> is observed let’s say that the student got a good grade. Now if we
+increase the difficulty of the course this will increase the probability of the student to be intelligent since we already know that he got a good grade. Hence in this case <span class="math notranslate nohighlight">\((A \perp C)\)</span> and <span class="math notranslate nohighlight">\(( A \not\perp C | B)\)</span>. This structure is also commonly known as V structure.</p></li>
+<li><p><strong>Common Cause:</strong> The influence flows from <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(C\)</span> when <span class="math notranslate nohighlight">\(B\)</span> is not observed. But when <span class="math notranslate nohighlight">\(B\)</span> is observed and change in <span class="math notranslate nohighlight">\(A\)</span> doesn’t affect <span class="math notranslate nohighlight">\(C\)</span> since it’s only dependent on <span class="math notranslate nohighlight">\(B\)</span>. Hence here also <span class="math notranslate nohighlight">\(( A \perp C | B)\)</span>.</p></li>
 </ol>
 <p>Let’s not see a few examples for finding the independencies in a newtork using pgmpy:</p>
 <div class="nbinput docutils container">
@@ -1828,27 +1851,27 @@ increase the difficulty of the course this will increase the probability of the 
 <h3 id="3.-How-is-this-Bayesian-Network-representing-the-Joint-Distribution-over-the-variables-?">3. How is this Bayesian Network representing the Joint Distribution over the variables ?<a class="headerlink" href="#3.-How-is-this-Bayesian-Network-representing-the-Joint-Distribution-over-the-variables-?" title="Link to this heading">¶</a></h3>
 <p>Till now we just have been considering that the Bayesian Network can represent the Joint Distribution without any proof. Now let’s see how to compute the Joint Distribution from the Bayesian Network.</p>
 <p>From the chain rule of probabiliy we know that:</p>
-<p><span class="math">P(A, B) = P(A | B) * P(B)</span></p>
+<p><span class="math notranslate nohighlight">\(P(A, B) = P(A | B) * P(B)\)</span></p>
 <p>Now in this case:</p>
-<p><span class="math">P(D, I, G, L, S) = P(L| S, G, D, I) * P(S | G, D, I) * P(G | D, I) * P(D | I) * P(I)</span></p>
+<p><span class="math notranslate nohighlight">\(P(D, I, G, L, S) = P(L| S, G, D, I) * P(S | G, D, I) * P(G | D, I) * P(D | I) * P(I)\)</span></p>
 <p>Applying the local independence conditions in the above equation we will get:</p>
-<p><span class="math">P(D, I, G, L, S) = P(L|G) * P(S|I) * P(G| D, I) * P(D) * P(I)</span></p>
+<p><span class="math notranslate nohighlight">\(P(D, I, G, L, S) = P(L|G) * P(S|I) * P(G| D, I) * P(D) * P(I)\)</span></p>
 <p>From the above equation we can clearly see that the Joint Distribution over all the variables is just the product of all the CPDs in the network. Hence encoding the independencies in the Joint Distribution in a graph structure helped us in reducing the number of parameters that we need to store.</p>
 <h3 id="4.-Inference-in-Bayesian-Models">4. Inference in Bayesian Models<a class="headerlink" href="#4.-Inference-in-Bayesian-Models" title="Link to this heading">¶</a></h3>
 <p>Till now we discussed just about representing Bayesian Networks. Now let’s see how we can do inference in a Bayesian Model and use it to predict values over new data points for machine learning tasks. In this section we will consider that we already have our model. We will talk about constructing the models from data in later parts of this tutorial.</p>
-<p>In inference we try to answer probability queries over the network given some other variables. So, we might want to know the probable grade of an intelligent student in a difficult class given that he scored good in SAT. So for computing these values from a Joint Distribution we will have to reduce over the given variables that is <span class="math">I = 1</span>, <span class="math">D = 1</span>, <span class="math">S = 1</span> and then marginalize over the other variables that is <span class="math">L</span> to get <span class="math">P(G | I=1, D=1, S=1)</span>. But carrying on
+<p>In inference we try to answer probability queries over the network given some other variables. So, we might want to know the probable grade of an intelligent student in a difficult class given that he scored good in SAT. So for computing these values from a Joint Distribution we will have to reduce over the given variables that is <span class="math notranslate nohighlight">\(I = 1\)</span>, <span class="math notranslate nohighlight">\(D = 1\)</span>, <span class="math notranslate nohighlight">\(S = 1\)</span> and then marginalize over the other variables that is <span class="math notranslate nohighlight">\(L\)</span> to get <span class="math notranslate nohighlight">\(P(G | I=1, D=1, S=1)\)</span>. But carrying on
 marginalize and reduce operation on the complete Joint Distribution is computationaly expensive since we need to iterate over the whole table for each operation and the table is exponential is size to the number of variables. But in Graphical Models we exploit the independencies to break these operations in smaller parts making it much faster.</p>
 <p>One of the very basic methods of inference in Graphical Models is <strong>Variable Elimination</strong>.</p>
 <h4 id="Variable-Elimination">Variable Elimination<a class="headerlink" href="#Variable-Elimination" title="Link to this heading">¶</a></h4>
 <p>We know that:</p>
-<p><span class="math">P(D, I, G, L, S) = P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)</span></p>
+<p><span class="math notranslate nohighlight">\(P(D, I, G, L, S) = P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)\)</span></p>
 <p>Now let’s say we just want to compute the probability of G. For that we will need to marginalize over all the other variables.</p>
-<p><span class="math">P(G) = \sum_{D, I, L, S} P(D, I, G, L, S)</span></p>
-<p><span class="math">P(G) = \sum_{D, I, L, S} P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)</span></p>
-<p><span class="math">P(G) = \sum_D \sum_I \sum_L \sum_S P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)</span></p>
+<p><span class="math notranslate nohighlight">\(P(G) = \sum_{D, I, L, S} P(D, I, G, L, S)\)</span></p>
+<p><span class="math notranslate nohighlight">\(P(G) = \sum_{D, I, L, S} P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)\)</span></p>
+<p><span class="math notranslate nohighlight">\(P(G) = \sum_D \sum_I \sum_L \sum_S P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)\)</span></p>
 <p>Now since not all the conditional distributions depend on all the variables we can push the summations inside:</p>
-<p><span class="math">P(G) = \sum_D \sum_I \sum_L \sum_S P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)</span></p>
-<p><span class="math">P(G) = \sum_D P(D) \sum_I P(G|D, I) * P(I) \sum_S P(S|I) \sum_L P(L|G)</span></p>
+<p><span class="math notranslate nohighlight">\(P(G) = \sum_D \sum_I \sum_L \sum_S P(L|G) * P(S|I) * P(G|D, I) * P(D) * P(I)\)</span></p>
+<p><span class="math notranslate nohighlight">\(P(G) = \sum_D P(D) \sum_I P(G|D, I) * P(I) \sum_S P(S|I) \sum_L P(L|G)\)</span></p>
 <p>So, by pushing the summations inside we have saved a lot of computation because we have to now iterate over much smaller tables.</p>
 <p>Let’s take an example for inference using Variable Elimination in pgmpy:</p>
 <div class="nbinput docutils container">
@@ -1895,9 +1918,9 @@ Eliminating: I: 100%|██████████| 4/4 [00:00&lt;00:00, 240.56
 
 </pre></div></div>
 </div>
-<p>There can be cases in which we want to compute the conditional distribution let’s say <span class="math">P(G | D=0, I=1)</span>. In such cases we need to modify our equations a bit:</p>
-<p><span class="math">P(G | D=0, I=1) = \sum_L \sum_S P(L|G) * P(S| I=1) * P(G| D=0, I=1) * P(D=0) * P(I=1)</span></p>
-<p><span class="math">P(G | D=0, I=1) = P(D=0) * P(I=1) * P(G | D=0, I=1) * \sum_L P(L | G) * \sum_S P(S | I=1)</span></p>
+<p>There can be cases in which we want to compute the conditional distribution let’s say <span class="math notranslate nohighlight">\(P(G | D=0, I=1)\)</span>. In such cases we need to modify our equations a bit:</p>
+<p><span class="math notranslate nohighlight">\(P(G | D=0, I=1) = \sum_L \sum_S P(L|G) * P(S| I=1) * P(G| D=0, I=1) * P(D=0) * P(I=1)\)</span></p>
+<p><span class="math notranslate nohighlight">\(P(G | D=0, I=1) = P(D=0) * P(I=1) * P(G | D=0, I=1) * \sum_L P(L | G) * \sum_S P(S | I=1)\)</span></p>
 <p>In pgmpy we will just need to pass an extra argument in the case of conditional distributions:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[58]:
@@ -2126,6 +2149,8 @@ Finding Elimination Order: : : 0it [00:00, ?it/s]
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

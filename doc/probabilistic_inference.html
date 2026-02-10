@@ -51,6 +51,10 @@
 
     
     
+      
+        <meta  content="Compute posterior probabilities with exact or approximate inference algorithms."  name="description" >
+      
+    
     
   
   <!-- SEO meta tags -->
@@ -78,6 +82,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +113,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -138,7 +165,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exact-inference" class="md-skip">
+        <a href="#example" class="md-skip">
           Skip to content
         </a>
       
@@ -594,20 +621,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#exact-inference" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="exact inference (reference label)"><span>Exact Inference</span></span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#approximate-inference" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span title="approximate inference (reference label)"><span>Approximate Inference</span></span>
+      <span title="/doc/probabilistic_inference.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -620,6 +637,42 @@
       <span title="when to use which (reference label)"><span>When to use which</span></span>
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/probabilistic_inference.rst#algorithms (reference label)"><span>Algorithms</span></span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exact-inference" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="exact inference (reference label)"><span>Exact Inference</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximate-inference" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="approximate inference (reference label)"><span>Approximate Inference</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -742,6 +795,30 @@
   
   <span class="md-ellipsis">
     <span title="/doc/example_models.rst (reference label)"><span>Example Models</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="simulations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/doc/simulations.rst (reference label)"><span>Simulations</span></span>
     
   </span>
   
@@ -903,20 +980,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#exact-inference" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="exact inference (reference label)"><span>Exact Inference</span></span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#approximate-inference" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span title="approximate inference (reference label)"><span>Approximate Inference</span></span>
+      <span title="/doc/probabilistic_inference.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -929,6 +996,42 @@
       <span title="when to use which (reference label)"><span>When to use which</span></span>
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/probabilistic_inference.rst#algorithms (reference label)"><span>Algorithms</span></span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exact-inference" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="exact inference (reference label)"><span>Exact Inference</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximate-inference" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="approximate inference (reference label)"><span>Approximate Inference</span></span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -950,12 +1053,35 @@
 
 
 <h1 id="probabilistic-inference">Probabilistic Inference<a class="headerlink" href="#probabilistic-inference" title="Link to this heading">¶</a></h1>
-<p>Probabilistic inference is the task of computing posterior probability
-distributions over variables of interest given observed evidence. For example,
-given a medical diagnosis model and observed symptoms, inference computes the
-probability distribution over possible diseases.</p>
-<p>pgmpy provides both exact and approximate inference algorithms.</p>
-<h2 id="exact-inference">Exact Inference<a class="headerlink" href="#exact-inference" title="Link to this heading">¶</a></h2>
+<p>Probabilistic inference computes the probability of variables of interest
+given observed evidence.</p>
+<p>Formally, inference computes a posterior such as
+<span class="math notranslate nohighlight">\(P(X \mid e) = \frac{P(X, e)}{P(e)}\)</span>, often by summing out hidden
+variables or using sampling to approximate the result.</p>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">VariableElimination</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_example_model</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">get_example_model</span><span class="p">(</span><span class="s2">&quot;alarm&quot;</span><span class="p">)</span>
+<span class="n">infer</span> <span class="o">=</span> <span class="n">VariableElimination</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">variable</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">nodes</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">infer</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">variable</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h2 id="when-to-use-which">When to use which<a class="headerlink" href="#when-to-use-which" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Variable Elimination</strong> – General-purpose exact inference. Good default for
+small to medium networks.</p></li>
+<li><p><strong>Belief Propagation</strong> – Efficient for tree-structured networks or when
+multiple queries share computation.</p></li>
+<li><p><strong>MPLP</strong> – MAP (most probable explanation) inference via linear programming
+relaxation.</p></li>
+<li><p><strong>Approximate / Gibbs</strong> – Use when the network is too large for exact
+inference or when approximate answers are acceptable.</p></li>
+</ul>
+<h2 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<h3 id="exact-inference">Exact Inference<a class="headerlink" href="#exact-inference" title="Link to this heading">¶</a></h3>
 <p>Exact inference computes the true posterior distribution. These methods are
 suitable for small to moderately sized networks.</p>
 <table class="docutils data align-default">
@@ -983,7 +1109,7 @@ suitable for small to moderately sized networks.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="approximate-inference">Approximate Inference<a class="headerlink" href="#approximate-inference" title="Link to this heading">¶</a></h2>
+<h3 id="approximate-inference">Approximate Inference<a class="headerlink" href="#approximate-inference" title="Link to this heading">¶</a></h3>
 <p>Approximate inference uses sampling to estimate posterior distributions. These
 methods scale better to large networks where exact inference is intractable.</p>
 <table class="docutils data align-default">
@@ -1008,17 +1134,6 @@ methods scale better to large networks where exact inference is intractable.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="when-to-use-which">When to use which<a class="headerlink" href="#when-to-use-which" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><strong>Variable Elimination</strong> – General-purpose exact inference. Good default for
-small to medium networks.</p></li>
-<li><p><strong>Belief Propagation</strong> – Efficient for tree-structured networks or when
-multiple queries share computation.</p></li>
-<li><p><strong>MPLP</strong> – MAP (most probable explanation) inference via linear programming
-relaxation.</p></li>
-<li><p><strong>Approximate / Gibbs</strong> – Use when the network is too large for exact
-inference or when approximate answers are acceptable.</p></li>
-</ul>
 
 
 
@@ -1122,6 +1237,8 @@ inference or when approximate answers are acceptable.</p></li>
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

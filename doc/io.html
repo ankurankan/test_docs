@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="example_models.html">
+        <link rel="prev" href="simulations.html">
       
       
         <link rel="next" href="custom_model.html">
@@ -51,6 +51,10 @@
 
     
     
+      
+        <meta  content="Import and export Bayesian Networks using common file formats like BIF, UAI, XMLBIF, and XDSL."  name="description" >
+      
+    
     
   
   <!-- SEO meta tags -->
@@ -78,6 +82,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +113,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -138,7 +165,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#usage" class="md-skip">
+        <a href="#example" class="md-skip">
           Skip to content
         </a>
       
@@ -685,6 +712,30 @@
                 
   
   
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="simulations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/doc/simulations.rst (reference label)"><span>Simulations</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
     
@@ -738,10 +789,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="usage (reference label)"><span>Usage</span></span>
+      <span title="/doc/io.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -893,10 +944,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="usage (reference label)"><span>Usage</span></span>
+      <span title="/doc/io.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -930,21 +981,23 @@
 
 
 <h1 id="exporting-importing-models">Exporting / Importing Models<a class="headerlink" href="#exporting-importing-models" title="Link to this heading">¶</a></h1>
-<p>pgmpy supports reading and writing Bayesian Networks in several standard file
-formats. This allows interoperability with other tools such as bnlearn, GeNIe,
-SamIam, and others.</p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_example_model</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.readwrite</span><span class="w"> </span><span class="kn">import</span> <span class="n">BIFWriter</span><span class="p">,</span> <span class="n">BIFReader</span>
+<p>pgmpy can read and write Bayesian Networks in common file formats to make your
+models portable across tools.</p>
+<p>In practice, these formats store both structure and CPDs so models can be
+reused for inference, simulation, or further editing.</p>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">VariableElimination</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.readwrite</span><span class="w"> </span><span class="kn">import</span> <span class="n">BIFReader</span><span class="p">,</span> <span class="n">BIFWriter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_example_model</span>
 
-<span class="c1"># Export a model to BIF format</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">get_example_model</span><span class="p">(</span><span class="s2">&quot;asia&quot;</span><span class="p">)</span>
-<span class="n">writer</span> <span class="o">=</span> <span class="n">BIFWriter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="n">writer</span><span class="o">.</span><span class="n">write_bif</span><span class="p">(</span><span class="s2">&quot;asia.bif&quot;</span><span class="p">)</span>
+<span class="n">BIFWriter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">write_bif</span><span class="p">(</span><span class="s2">&quot;asia.bif&quot;</span><span class="p">)</span>
 
-<span class="c1"># Import a model from BIF format</span>
-<span class="n">reader</span> <span class="o">=</span> <span class="n">BIFReader</span><span class="p">(</span><span class="s2">&quot;asia.bif&quot;</span><span class="p">)</span>
-<span class="n">imported_model</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>
+<span class="n">imported</span> <span class="o">=</span> <span class="n">BIFReader</span><span class="p">(</span><span class="s2">&quot;asia.bif&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>
+<span class="n">infer</span> <span class="o">=</span> <span class="n">VariableElimination</span><span class="p">(</span><span class="n">imported</span><span class="p">)</span>
+<span class="n">variable</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">imported</span><span class="o">.</span><span class="n">nodes</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">infer</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">variable</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <h2 id="supported-formats">Supported Formats<a class="headerlink" href="#supported-formats" title="Link to this heading">¶</a></h2>

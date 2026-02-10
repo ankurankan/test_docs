@@ -51,6 +51,10 @@
 
     
     
+      
+        <meta  content="Define custom graphical models and CPD types in pgmpy to build Bayesian and Markov models."  name="description" >
+      
+    
     
   
   <!-- SEO meta tags -->
@@ -78,6 +82,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +113,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -138,7 +165,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#model-types" class="md-skip">
+        <a href="#example" class="md-skip">
           Skip to content
         </a>
       
@@ -689,6 +716,30 @@
   
   
     <li class="md-nav__item">
+      <a href="simulations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/doc/simulations.rst (reference label)"><span>Simulations</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="io.html" class="md-nav__link">
         
   
@@ -762,6 +813,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/custom_model.rst#example (reference label)"><span>Example</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#model-types" class="md-nav__link">
     
     <span class="md-ellipsis">
@@ -776,26 +837,6 @@
     
     <span class="md-ellipsis">
       <span title="/doc/custom_model.rst#factor-cpd-types (reference label)"><span>Factor / CPD Types</span></span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-discrete-bayesian-network" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span title="/doc/custom_model.rst#example-discrete-bayesian-network (reference label)"><span>Example:<wbr> Discrete Bayesian Network</span></span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-linear-gaussian-bayesian-network" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span title="/doc/custom_model.rst#example-linear-gaussian-bayesian-network (reference label)"><span>Example:<wbr> Linear Gaussian Bayesian Network</span></span>
     </span>
   </a>
   
@@ -913,6 +954,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/custom_model.rst#example (reference label)"><span>Example</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#model-types" class="md-nav__link">
     
     <span class="md-ellipsis">
@@ -927,26 +978,6 @@
     
     <span class="md-ellipsis">
       <span title="/doc/custom_model.rst#factor-cpd-types (reference label)"><span>Factor / CPD Types</span></span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-discrete-bayesian-network" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span title="/doc/custom_model.rst#example-discrete-bayesian-network (reference label)"><span>Example:<wbr> Discrete Bayesian Network</span></span>
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-linear-gaussian-bayesian-network" class="md-nav__link">
-    
-    <span class="md-ellipsis">
-      <span title="/doc/custom_model.rst#example-linear-gaussian-bayesian-network (reference label)"><span>Example:<wbr> Linear Gaussian Bayesian Network</span></span>
     </span>
   </a>
   
@@ -970,8 +1001,23 @@
 
 
 <h1 id="defining-a-custom-model">Defining a Custom Model<a class="headerlink" href="#defining-a-custom-model" title="Link to this heading">¶</a></h1>
-<p>pgmpy supports several types of graphical models. Each model type pairs with
-specific factor (CPD) types to define the joint probability distribution.</p>
+<p>pgmpy lets you define different graphical model families and their
+corresponding factor or CPD types.</p>
+<p>For a DAG model, the joint distribution factorizes as a product of local
+conditionals over parents:</p>
+<div class="math notranslate nohighlight">
+\[P(X_1, \ldots, X_n) = \prod_{i=1}^n P(X_i \mid Pa_i)\]</div>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.estimators</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaximumLikelihoodEstimator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiscreteBayesianNetwork</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;sachs_discrete&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DiscreteBayesianNetwork</span><span class="p">([(</span><span class="s2">&quot;PKA&quot;</span><span class="p">,</span> <span class="s2">&quot;ERK&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;ERK&quot;</span><span class="p">,</span> <span class="s2">&quot;Akt&quot;</span><span class="p">)])</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">MaximumLikelihoodEstimator</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fitted</span><span class="o">.</span><span class="n">get_cpds</span><span class="p">())</span>
+</code></pre></div>
+</div>
 <h2 id="model-types">Model Types<a class="headerlink" href="#model-types" title="Link to this heading">¶</a></h2>
 <table class="docutils data align-default">
 <colgroup>
@@ -1061,49 +1107,6 @@ specific factor (CPD) types to define the joint probability distribution.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="example-discrete-bayesian-network">Example: Discrete Bayesian Network<a class="headerlink" href="#example-discrete-bayesian-network" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BayesianNetwork</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.factors.discrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">TabularCPD</span>
-
-<span class="c1"># Define structure</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">BayesianNetwork</span><span class="p">([(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;L&quot;</span><span class="p">)])</span>
-
-<span class="c1"># Define CPDs</span>
-<span class="n">cpd_d</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[[</span><span class="mf">0.6</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">]])</span>
-<span class="n">cpd_i</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[[</span><span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">]])</span>
-<span class="n">cpd_g</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span>
-    <span class="s2">&quot;G&quot;</span><span class="p">,</span>
-    <span class="mi">3</span><span class="p">,</span>
-    <span class="p">[[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]],</span>
-    <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">],</span>
-    <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-<span class="p">)</span>
-<span class="n">cpd_l</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span>
-    <span class="s2">&quot;L&quot;</span><span class="p">,</span>
-    <span class="mi">2</span><span class="p">,</span>
-    <span class="p">[[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]],</span>
-    <span class="n">evidence</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">],</span>
-    <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
-<span class="p">)</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">add_cpds</span><span class="p">(</span><span class="n">cpd_d</span><span class="p">,</span> <span class="n">cpd_i</span><span class="p">,</span> <span class="n">cpd_g</span><span class="p">,</span> <span class="n">cpd_l</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">check_model</span><span class="p">()</span>  <span class="c1"># Returns True if valid</span>
-</code></pre></div>
-</div>
-<h2 id="example-linear-gaussian-bayesian-network">Example: Linear Gaussian Bayesian Network<a class="headerlink" href="#example-linear-gaussian-bayesian-network" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearGaussianBayesianNetwork</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.factors.continuous</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearGaussianCPD</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">LinearGaussianBayesianNetwork</span><span class="p">([(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">)])</span>
-
-<span class="n">cpd_x</span> <span class="o">=</span> <span class="n">LinearGaussianCPD</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="n">cpd_y</span> <span class="o">=</span> <span class="n">LinearGaussianCPD</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="mf">0.5</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">])</span>
-<span class="n">cpd_z</span> <span class="o">=</span> <span class="n">LinearGaussianCPD</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="mf">0.3</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Y&quot;</span><span class="p">])</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">add_cpds</span><span class="p">(</span><span class="n">cpd_x</span><span class="p">,</span> <span class="n">cpd_y</span><span class="p">,</span> <span class="n">cpd_z</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">check_model</span><span class="p">()</span>
-</code></pre></div>
-</div>
 
 
 
@@ -1207,6 +1210,8 @@ specific factor (CPD) types to define the joint probability distribution.</p>
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

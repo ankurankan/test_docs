@@ -79,6 +79,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -105,13 +110,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -574,7 +597,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="parameter estimation (reference label)"><span>Parameter Estimation</span></span>
+    <span title="/examples.rst#parameter-estimation (reference label)"><span>Parameter Estimation</span></span>
     
   </span>
   
@@ -598,7 +621,7 @@
   
   
   <span class="md-ellipsis">
-    <span title="probabilistic inference (reference label)"><span>Probabilistic Inference</span></span>
+    <span title="/examples.rst#probabilistic-inference (reference label)"><span>Probabilistic Inference</span></span>
     
   </span>
   
@@ -1377,7 +1400,7 @@
 <li><p>Linear Gaussian CPD</p></li>
 </ol>
 <p>In many situations, some variables are best modeled as taking values in some continuous space. Examples include variables such as position, velocity, temperature, and pressure. Clearly, we cannot use a table representation in this case.</p>
-<p>Nothing in the formulation of a Bayesian network requires that we restrict attention to discrete variables. The only requirement is that the CPD, <span class="math">P(X | Y_1, Y_2, \cdots Y_n)</span> represent, for every assignment of values <span class="math">y_1 \in Val(Y_1), y_2 \in Val(Y_2), \cdots, y_n \in val(Y_n)</span>, a distribution over <span class="math">X</span>. In this case, <span class="math">X</span> might be continuous, in which case the CPD would need to represent distributions over a continuum of values; we might also have <span class="math">X</span>’s parents
+<p>Nothing in the formulation of a Bayesian network requires that we restrict attention to discrete variables. The only requirement is that the CPD, <span class="math notranslate nohighlight">\(P(X | Y_1, Y_2, \cdots Y_n)\)</span> represent, for every assignment of values <span class="math notranslate nohighlight">\(y_1 \in Val(Y_1), y_2 \in Val(Y_2), \cdots, y_n \in val(Y_n)\)</span>, a distribution over <span class="math notranslate nohighlight">\(X\)</span>. In this case, <span class="math notranslate nohighlight">\(X\)</span> might be continuous, in which case the CPD would need to represent distributions over a continuum of values; we might also have <span class="math notranslate nohighlight">\(X\)</span>’s parents
 continuous, so that the CPD would also need to represent a continuum of different probability distributions. There exists implicit representations for CPDs of this type, allowing us to apply all the network machinery for the continuous case as well.</p>
 <h3 id="Base-Class-for-Continuous-Factors">Base Class for Continuous Factors<a class="headerlink" href="#Base-Class-for-Continuous-Factors" title="Link to this heading">¶</a></h3>
 <p>This class will behave as a base class for the continuous factor representations. All the present and future factor classes will be derived from this base class. We need to specify the variable names and a pdf function to initialize this class.</p>
@@ -1525,10 +1548,10 @@ continuous, so that the CPD would also need to represent a continuum of differen
 </div>
 <p>The ContinuousFactor class also has a method <strong>discretize</strong> that takes a pgmpy Discretizer class as input. It will output a list of discrete probability masses or a Factor or TabularCPD object depending upon the discretization method used. Although, we do not have inbuilt discretization algorithms for multivariate distributions for now, the users can always define their own Discretizer class by subclassing the pgmpy.BaseDiscretizer class.</p>
 <h3 id="Joint-Gaussian-Distributions">Joint Gaussian Distributions<a class="headerlink" href="#Joint-Gaussian-Distributions" title="Link to this heading">¶</a></h3>
-<p>In its most common representation, a multivariate Gaussian distribution over <span class="math">X_1 \cdots X_n</span> is characterized by an n-dimensional mean vector <span class="math">\mu</span>, and a symmetric <span class="math">n \times n</span> covariance matrix <span class="math">\Sigma</span>. The density function is most defined as -</p>
-<div class="math">
-<p><span class="math">p(x) = \dfrac{1}{(2\pi)^{n/2}| \Sigma |^{1/2}} \exp[-0.5*(x- \mu )^T \Sigma^{-1}(x- \mu)]</span></p>
-</div><p>The class pgmpy.JointGaussianDistribution provides its representation. This is derived from the class pgmpy.ContinuousFactor. We need to specify the variable names, a mean vector and a covariance matrix for its inialization. It will automatically comute the pdf function given these parameters.</p>
+<p>In its most common representation, a multivariate Gaussian distribution over <span class="math notranslate nohighlight">\(X_1 \cdots X_n\)</span> is characterized by an n-dimensional mean vector <span class="math notranslate nohighlight">\(\mu\)</span>, and a symmetric <span class="math notranslate nohighlight">\(n \times n\)</span> covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>. The density function is most defined as -</p>
+<div class="math notranslate nohighlight">
+\[p(x) = \dfrac{1}{(2\pi)^{n/2}| \Sigma |^{1/2}} \exp[-0.5*(x- \mu )^T \Sigma^{-1}(x- \mu)]\]</div>
+<p>The class pgmpy.JointGaussianDistribution provides its representation. This is derived from the class pgmpy.ContinuousFactor. We need to specify the variable names, a mean vector and a covariance matrix for its inialization. It will automatically comute the pdf function given these parameters.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
 </code></pre></div>
@@ -1604,7 +1627,7 @@ array([[ 4.,  2., -2.],
 0.0014805631279234139
 </pre></div></div>
 </div>
-<p>This class overrides the basic operation methods <strong>(marginalize, reduce, normalize, product and divide)</strong> as these operations here are more efficient than the ones in its parent class. Most of these operation involve a matrix inversion which is <span class="math">\mathcal{O}(n^3)</span> with repect to the number of variables.</p>
+<p>This class overrides the basic operation methods <strong>(marginalize, reduce, normalize, product and divide)</strong> as these operations here are more efficient than the ones in its parent class. Most of these operation involve a matrix inversion which is <span class="math notranslate nohighlight">\(\mathcal{O}(n^3)\)</span> with repect to the number of variables.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
 </code></pre></div>
@@ -1671,18 +1694,18 @@ array([[ 3.6,  1. , -0.4, -0.6],
 <p>While the Joint Gaussian representation is useful for certain sampling algorithms, a closer look reveals that it can also not be used directly in the sum-product algorithms. Why? Because operations like product and reduce, as mentioned above involve matrix inversions at each step.</p>
 <p>So, in order to compactly describe the intermediate factors in a Gaussian network without the costly matrix inversions at each step, a simple parametric representation is used known as the Canonical Factor. This representation is closed under the basic operations used in inference: factor product, factor division, factor reduction, and marginalization. Thus, we can define a set of simple data structures that allow the inference process to be performed. Moreover, the integration operation
 required by marginalization is always well defined, and it is guaranteed to produce a finite integral under certain conditions; when it is well defined, it has a simple analytical solution.</p>
-<p>A canonical form <span class="math">C (X; K,h, g)</span> is defined as:</p>
-<div class="math">
-<p><span class="math">C(X; K,h,g) = \exp(-0.5X^TKX + h^TX + g)</span></p>
-</div><p>We can represent every Gaussian as a canonical form. Rewriting the joint Gaussian pdf we obtain,</p>
-<p><span class="math">N (\mu; \Sigma) = C (K, h, g)</span> where:</p>
-<div class="math">
-<p><span class="math">K = \Sigma^{-1}</span></p>
-</div><div class="math">
-<p><span class="math">h = \Sigma^{-1} \mu</span></p>
-</div><div class="math">
-<p><span class="math">g = -0.5 \mu^T \Sigma^{-1} \mu - \log((2 \pi)^{n/2}| \Sigma |^{1/2}</span></p>
-</div><p>Similar to the JointGaussainDistribution class, the CanonicalFactor class is also derived from the ContinuousFactor class but with its own implementations of the methods required for the sum-product algorithms that are much more efficient than its parent class methods. Let us have a look at the API of a few methods in this class.</p>
+<p>A canonical form <span class="math notranslate nohighlight">\(C (X; K,h, g)\)</span> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[C(X; K,h,g) = \exp(-0.5X^TKX + h^TX + g)\]</div>
+<p>We can represent every Gaussian as a canonical form. Rewriting the joint Gaussian pdf we obtain,</p>
+<p><span class="math notranslate nohighlight">\(N (\mu; \Sigma) = C (K, h, g)\)</span> where:</p>
+<div class="math notranslate nohighlight">
+\[K = \Sigma^{-1}\]</div>
+<div class="math notranslate nohighlight">
+\[h = \Sigma^{-1} \mu\]</div>
+<div class="math notranslate nohighlight">
+\[g = -0.5 \mu^T \Sigma^{-1} \mu - \log((2 \pi)^{n/2}| \Sigma |^{1/2}\]</div>
+<p>Similar to the JointGaussainDistribution class, the CanonicalFactor class is also derived from the ContinuousFactor class but with its own implementations of the methods required for the sum-product algorithms that are much more efficient than its parent class methods. Let us have a look at the API of a few methods in this class.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
 </code></pre></div>
@@ -1824,20 +1847,20 @@ array([[ 2.25 ],
 <h3 id="Linear-Gaussian-CPD">Linear Gaussian CPD<a class="headerlink" href="#Linear-Gaussian-CPD" title="Link to this heading">¶</a></h3>
 <p>A linear gaussian conditional probability distribution is defined on a continuous variable. All the parents of this variable are also continuous. The mean of this variable, is linearly dependent on the mean of its parent variables and the variance is independent.</p>
 <p>For example,</p>
-<div class="math">
-<p><span class="math">P(Y ; x_1, x_2, x_3) = N(\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_0 ; \sigma^2)</span></p>
-</div><p>Let <span class="math">Y</span> be a linear Gaussian of its parents $X_1, <span class="math">\cdots</span>, X_k:</p>
-<div class="math">
-<p><span class="math">p(Y | x) = N(\beta_0 + \beta^T x ; \sigma^2)</span></p>
-</div><p>The distribution of <span class="math">Y</span> is a normal distribution <span class="math">p(Y)</span> where:</p>
-<div class="math">
-<p><span class="math">\mu_Y = \beta_0 + \beta^T \mu</span></p>
-</div><div class="math">
-<p><span class="math">\sigma^2_Y = \sigma^2 + \beta^{T \Sigma \beta}</span></p>
-</div><p>The joint distribution over <span class="math">\{X, Y\}</span> is a normal distribution where:</p>
-<div class="math">
-<p><span class="math">Cov[X_i; Y] = {\sum_{j=1}^{k} \beta_j \Sigma_{i,j}}</span></p>
-</div><p>Assume that <span class="math">X_1, \cdots, X_k</span> are jointly Gaussian with distribution <span class="math">\mathcal{N}(\mu; \Sigma)</span>. Then: For its representation pgmpy has a class named LinearGaussianCPD in the module pgmpy.factors.continuous. To instantiate an object of this class, one needs to provide a variable name, the value of the <span class="math">\beta_0</span> term, the variance, a list of the parent variable names and a list of the coefficient values of the linear equation (beta_vector), where the list of parent variable
+<div class="math notranslate nohighlight">
+\[P(Y ; x_1, x_2, x_3) = N(\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_0 ; \sigma^2)\]</div>
+<p>Let <span class="math notranslate nohighlight">\(Y\)</span> be a linear Gaussian of its parents $X_1, <span class="math">\cdots</span>, X_k:</p>
+<div class="math notranslate nohighlight">
+\[p(Y | x) = N(\beta_0 + \beta^T x ; \sigma^2)\]</div>
+<p>The distribution of <span class="math notranslate nohighlight">\(Y\)</span> is a normal distribution <span class="math notranslate nohighlight">\(p(Y)\)</span> where:</p>
+<div class="math notranslate nohighlight">
+\[\mu_Y = \beta_0 + \beta^T \mu\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2_Y = \sigma^2 + \beta^{T \Sigma \beta}\]</div>
+<p>The joint distribution over <span class="math notranslate nohighlight">\(\{X, Y\}\)</span> is a normal distribution where:</p>
+<div class="math notranslate nohighlight">
+\[Cov[X_i; Y] = {\sum_{j=1}^{k} \beta_j \Sigma_{i,j}}\]</div>
+<p>Assume that <span class="math notranslate nohighlight">\(X_1, \cdots, X_k\)</span> are jointly Gaussian with distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\mu; \Sigma)\)</span>. Then: For its representation pgmpy has a class named LinearGaussianCPD in the module pgmpy.factors.continuous. To instantiate an object of this class, one needs to provide a variable name, the value of the <span class="math notranslate nohighlight">\(\beta_0\)</span> term, the variance, a list of the parent variable names and a list of the coefficient values of the linear equation (beta_vector), where the list of parent variable
 names and beta_vector list is optional and defaults to None.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[25]:
@@ -2032,6 +2055,8 @@ array([[ 4.,  2., -2.],
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

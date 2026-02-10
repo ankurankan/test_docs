@@ -51,6 +51,10 @@
 
     
     
+      
+        <meta  content="Estimate CPDs for known structures using MLE, Bayesian, or EM methods."  name="description" >
+      
+    
     
   
   <!-- SEO meta tags -->
@@ -78,6 +82,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +113,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -138,7 +165,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#algorithms" class="md-skip">
+        <a href="#example" class="md-skip">
           Skip to content
         </a>
       
@@ -570,10 +597,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#algorithms" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="algorithms (reference label)"><span>Algorithms</span></span>
+      <span title="/doc/parameter_estimation.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -584,6 +611,16 @@
     
     <span class="md-ellipsis">
       <span title="/doc/parameter_estimation.rst#when-to-use-which (reference label)"><span>When to use which</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/parameter_estimation.rst#algorithms (reference label)"><span>Algorithms</span></span>
     </span>
   </a>
   
@@ -750,6 +787,30 @@
   
   
     <li class="md-nav__item">
+      <a href="simulations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/doc/simulations.rst (reference label)"><span>Simulations</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="io.html" class="md-nav__link">
         
   
@@ -893,10 +954,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#algorithms" class="md-nav__link">
+  <a href="#example" class="md-nav__link">
     
     <span class="md-ellipsis">
-      <span title="algorithms (reference label)"><span>Algorithms</span></span>
+      <span title="/doc/parameter_estimation.rst#example (reference label)"><span>Example</span></span>
     </span>
   </a>
   
@@ -907,6 +968,16 @@
     
     <span class="md-ellipsis">
       <span title="/doc/parameter_estimation.rst#when-to-use-which (reference label)"><span>When to use which</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/doc/parameter_estimation.rst#algorithms (reference label)"><span>Algorithms</span></span>
     </span>
   </a>
   
@@ -930,10 +1001,36 @@
 
 
 <h1 id="parameter-estimation">Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Link to this heading">¶</a></h1>
-<p>Once the structure of a graphical model is known, the next step is to estimate
-the parameters – the conditional probability distributions (CPDs) at each node.
-pgmpy supports several estimation methods depending on the data type, model
-type, and whether data is fully observed or contains missing values.</p>
+<p>Once a model structure is known, parameter estimation fills in the numbers for
+its conditional probability distributions (CPDs).</p>
+<p>For discrete models, maximum likelihood estimation (MLE) sets each conditional
+probability from relative frequencies:</p>
+<div class="math notranslate nohighlight">
+\[\hat{P}(X = x \mid Pa = p) = \frac{N(x, p)}{N(p)}\]</div>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.estimators</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaximumLikelihoodEstimator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiscreteBayesianNetwork</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;sachs_discrete&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DiscreteBayesianNetwork</span><span class="p">([(</span><span class="s2">&quot;PKA&quot;</span><span class="p">,</span> <span class="s2">&quot;ERK&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;ERK&quot;</span><span class="p">,</span> <span class="s2">&quot;Akt&quot;</span><span class="p">)])</span>
+
+<span class="n">mle</span> <span class="o">=</span> <span class="n">MaximumLikelihoodEstimator</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">cpds</span> <span class="o">=</span> <span class="n">mle</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_cpds</span><span class="p">(</span><span class="o">*</span><span class="n">cpds</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h2 id="when-to-use-which">When to use which<a class="headerlink" href="#when-to-use-which" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>MLE</strong> – The default choice when data is fully observed. Computes CPDs
+directly from frequency counts (discrete) or regression (continuous).</p></li>
+<li><p><strong>Bayesian Estimation</strong> – Useful with small datasets where MLE may overfit.
+Incorporates prior knowledge via Dirichlet priors (e.g., BDeu).</p></li>
+<li><p><strong>EM</strong> – Required when the data contains missing values. Iterates between
+imputing missing data and re-estimating parameters.</p></li>
+<li><p><strong>SEM / IV Estimator</strong> – For Structural Equation Models with continuous
+variables and linear relationships.</p></li>
+</ul>
 <h2 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
 <table class="docutils data align-default">
 <colgroup>
@@ -963,17 +1060,6 @@ type, and whether data is fully observed or contains missing values.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="when-to-use-which">When to use which<a class="headerlink" href="#when-to-use-which" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><strong>MLE</strong> – The default choice when data is fully observed. Computes CPDs
-directly from frequency counts (discrete) or regression (continuous).</p></li>
-<li><p><strong>Bayesian Estimation</strong> – Useful with small datasets where MLE may overfit.
-Incorporates prior knowledge via Dirichlet priors (e.g., BDeu).</p></li>
-<li><p><strong>EM</strong> – Required when the data contains missing values. Iterates between
-imputing missing data and re-estimating parameters.</p></li>
-<li><p><strong>SEM / IV Estimator</strong> – For Structural Equation Models with continuous
-variables and linear relationships.</p></li>
-</ul>
 
 
 
@@ -1077,6 +1163,8 @@ variables and linear relationships.</p></li>
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>

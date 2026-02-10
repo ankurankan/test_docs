@@ -78,6 +78,11 @@
   <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
   <!-- Header social links styling -->
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap");
+    :root {
+      --md-text-font: "Source Sans 3", system-ui, sans-serif;
+      --md-code-font: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
     .md-header__social {
       display: flex;
       align-items: center;
@@ -104,13 +109,31 @@
     [data-md-color-scheme="slate"] .md-header__social a {
       color: var(--md-default-fg-color--light);
     }
+    /* Card visibility in light/dark modes */
+    .sd-card {
+      background-color: var(--pgmpy-card-bg, var(--md-default-bg-color));
+      border: 1px solid var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .sd-card .sd-card-header,
+    .sd-card .sd-card-footer {
+      border-color: var(--pgmpy-card-border, rgba(0, 0, 0, 0.08));
+    }
+    [data-md-color-scheme="slate"] .sd-card {
+      --pgmpy-card-bg: rgba(255, 255, 255, 0.045);
+      --pgmpy-card-border: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
     /* Hover shadow effect on feature cards */
     .sd-card-hover {
       transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
     .sd-card-hover:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
       transform: translateY(-2px);
+    }
+    [data-md-color-scheme="slate"] .sd-card-hover:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
     }
     /* Center content when right sidebar (toc) is hidden */
     .md-sidebar--secondary[hidden] ~ .md-content {
@@ -5937,7 +5960,7 @@ collider structure in the learned skeleton.</p>
 </p>
 </dd>
 <dt class="field-odd" id="pgmpy.estimators.PC.estimate-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#pgmpy.estimators.PC.estimate-return-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p>pgmpy.base.DAG, pgmpy.base.PDAG, or tuple(networkx.UndirectedGraph, dict)</p>
+<dd class="field-odd"><p><a class="reference internal" href="../models/dag.html#pgmpy.base.DAG" title="pgmpy.base.DAG (Python class) — Directed Graphical Model, graph with vertex roles.">pgmpy.base.DAG</a>, <a class="reference internal" href="../models/pdag.html#pgmpy.base.PDAG" title="pgmpy.base.PDAG (Python class) — Class for representing PDAGs (also known as CPDAG). PDAGs are the equivalence classes of DAGs and contain both directed and undirected edges.">pgmpy.base.PDAG</a>, or tuple(networkx.UndirectedGraph, dict)</p>
 </dd>
 </dl>
 <p class="rubric">References</p>
@@ -5993,7 +6016,7 @@ Any completion by (removing one of the both-way edges for each such
 pair) results in a I-equivalent Bayesian network DAG.</p>
 </dd>
 <dt class="field-odd" id="pgmpy.estimators.PC.orient_colliders-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#pgmpy.estimators.PC.orient_colliders-return-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p>pgmpy.base.PDAG</p>
+<dd class="field-odd"><p><a class="reference internal" href="../models/pdag.html#pgmpy.base.PDAG" title="pgmpy.base.PDAG (Python class) — Class for representing PDAGs (also known as CPDAG). PDAGs are the equivalence classes of DAGs and contain both directed and undirected edges.">pgmpy.base.PDAG</a></p>
 </dd>
 </dl>
 <p class="rubric">References</p>
@@ -6417,7 +6440,7 @@ than <cite>significance_level</cite> else returns False.</p>
 <dt class="sig sig-object highlight sig-wrap py" id="pgmpy.estimators.CITests.pearsonr">
 <span class="sig-prename descclassname"><span class="pre">pgmpy.estimators.CITests.</span></span><span class="sig-name descname"><span class="pre">pearsonr</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pgmpy.estimators.CITests.pearsonr.X" title="pgmpy.estimators.CITests.pearsonr.X (Python parameter) — The first variable for testing the independence condition X ⟂ Y | Z."><span class="n"><span class="pre">X</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pgmpy.estimators.CITests.pearsonr.Y" title="pgmpy.estimators.CITests.pearsonr.Y (Python parameter) — The second variable for testing the independence condition X ⟂ Y | Z."><span class="n"><span class="pre">Y</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pgmpy.estimators.CITests.pearsonr.Z" title="pgmpy.estimators.CITests.pearsonr.Z (Python parameter) — A list of conditional variables for testing the condition X ⟂ Y | Z."><span class="n"><span class="pre">Z</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pgmpy.estimators.CITests.pearsonr.data" title="pgmpy.estimators.CITests.pearsonr.data (Python parameter) — The dataset in which to test the independence condition."><span class="n"><span class="pre">data</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#pgmpy.estimators.CITests.pearsonr.boolean" title="pgmpy.estimators.CITests.pearsonr.boolean (Python parameter) — If True, returns a boolean indicating independence (based on significance_level). If False, returns the test statistic and p-value."><span class="n"><span class="pre">boolean</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">**</span></span><a class="n reference internal" href="#pgmpy.estimators.CITests.pearsonr.kwargs" title="pgmpy.estimators.CITests.pearsonr.kwargs (Python parameter) — Additional arguments."><span class="n"><span class="pre">kwargs</span></span></a></em></span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pgmpy/estimators/CITests.html#pearsonr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pgmpy.estimators.CITests.pearsonr" title="Link to this definition">¶</a></dt>
 <dd><p>Compute Pearson correlation coefficient and p-value for testing non-correlation.</p>
-<p>Should be used only on continuous data. In case when <span class="math">Z \neq \emptyset</span> uses
+<p>Should be used only on continuous data. In case when <span class="math notranslate nohighlight">\(Z \neq \emptyset\)</span> uses
 linear regression and computes pearson coefficient on residuals.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="pgmpy.estimators.CITests.pearsonr-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#pgmpy.estimators.CITests.pearsonr-parameters" title="Permalink to this headline">¶</a></dt>
@@ -6742,6 +6765,8 @@ Journal of the Royal Statistical Society: Series B (Methodological) 46.3 (1984):
         <script src="../_static/copybutton.js?v=f281be69"></script>
         <script src="../_static/design-tabs.js?v=f930bc37"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js"></script>
     
   </body>
 </html>
