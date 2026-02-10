@@ -1,0 +1,1442 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="Structure_Learning_TAN.html">
+      
+      
+        <link rel="next" href="Parameter_Learning_Discrete_BN.html">
+      
+      
+      <link rel="icon" href="../_static/logo_favi.ico">
+    
+    
+      
+        <title>Expert Knowledge Integration with Causal Discovery - pgmpy</title>
+      
+    
+    
+      
+        
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.acf80fe7f4d9ef9e2.min.css?v=9e56d0d2" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+        <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  
+  <!-- SEO meta tags -->
+  <meta name="description" content="pgmpy: A Python library for causal inference and probabilistic inference using Directed Acyclic Graphs (DAGs) and Bayesian Networks.">
+  <meta name="keywords" content="pgmpy, Bayesian Networks, causal inference, probabilistic graphical models, structure learning, parameter estimation, Python">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="pgmpy">
+  <meta property="og:title" content="Expert Knowledge Integration with Causal Discovery">
+  <meta property="og:description" content="pgmpy: A Python library for causal inference and probabilistic inference using Directed Acyclic Graphs (DAGs) and Bayesian Networks.">
+  <meta property="og:url" content="https://pgmpy.org/examples/Expert_Knowledge.html">
+  <meta property="og:image" content="https://pgmpy.org/_static/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Expert Knowledge Integration with Causal Discovery">
+  <meta name="twitter:description" content="pgmpy: A Python library for causal inference and probabilistic inference using Directed Acyclic Graphs (DAGs) and Bayesian Networks.">
+  <meta name="twitter:image" content="https://pgmpy.org/_static/logo.png">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCFR07M31W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HCFR07M31W');
+  </script>
+  <!-- EthicalAds -->
+  <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+  <!-- Header social links styling -->
+  <style>
+    .md-header__social {
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+      margin-left: 0.4rem;
+    }
+    .md-header__social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem;
+      color: var(--md-default-fg-color--light);
+      opacity: 0.7;
+      transition: opacity 0.25s;
+    }
+    .md-header__social a:hover {
+      opacity: 1;
+    }
+    .md-header__social svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      fill: currentColor;
+    }
+    [data-md-color-scheme="slate"] .md-header__social a {
+      color: var(--md-default-fg-color--light);
+    }
+    /* Hover shadow effect on feature cards */
+    .sd-card-hover {
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .sd-card-hover:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+    /* Center content when right sidebar (toc) is hidden */
+    .md-sidebar--secondary[hidden] ~ .md-content {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Temporal-Order-with-PC-Algorithm" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="pgmpy" class="md-header__button md-logo" aria-label="pgmpy" data-md-component="logo">
+      <img src="../_static/logo.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            pgmpy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Expert Knowledge Integration with Causal Discovery
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pgmpy/pgmpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pgmpy/pgmpy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../started/base.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/started/base.rst (reference label)"><span>Getting Started</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../documentation.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/documentation.rst (reference label)"><span>Documentation</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="../examples.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/examples.rst (reference label)"><span>Examples</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/api.rst (reference label)"><span>API Reference</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../development.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/development.rst (reference label)"><span>Development</span></span>
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="pgmpy" class="md-nav__button md-logo" aria-label="pgmpy" data-md-component="logo">
+      <img src="../_static/logo.png" alt="logo">
+    </a>
+    pgmpy
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pgmpy/pgmpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pgmpy/pgmpy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../started/base.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/started/base.rst (reference label)"><span>Getting Started</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/documentation.rst (reference label)"><span>Documentation</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../examples.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples.rst (reference label)"><span>Examples</span></span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            <span title="/examples.rst (reference label)"><span>Examples</span></span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples.html#defining-bayesian-networks" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples.rst#defining-bayesian-networks (reference label)"><span>Defining Bayesian Networks</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../examples.html#causal-discovery-structure-learning" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    <span title="causal discovery / structure learning (reference label)"><span>Causal Discovery / Structure Learning</span></span>
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            <span title="causal discovery / structure learning (reference label)"><span>Causal Discovery / Structure Learning</span></span>
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Structure_Learning.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples/structure_learning.ipynb (reference label)"><span>Structure Learning in Bayesian Networks</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Structure_Learning_Chow_Liu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples/structure_learning_chow_liu.ipynb (reference label)"><span>Learning Tree Structure from Data using the Chow-<wbr>Liu Algorithm</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Structure_Learning_TAN.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples/structure_learning_tan.ipynb (reference label)"><span>Learning Tree-<wbr>augmented Naive Bayes <wbr>(TAN) Structure from Data</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples/expert_knowledge.ipynb (reference label)"><span>Expert Knowledge Integration with Causal Discovery</span></span>
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples/expert_knowledge.ipynb (reference label)"><span>Expert Knowledge Integration with Causal Discovery</span></span>
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/examples/expert_knowledge.ipynb (reference label)"><span>Expert Knowledge Integration with Causal Discovery</span></span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Temporal-Order-with-PC-Algorithm" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/examples/expert_knowledge.ipynb#temporal-order-with-pc-algorithm (reference label)"><span>Temporal Order with PC Algorithm</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Expert-knowledge-based-on-search-space" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/examples/expert_knowledge.ipynb#expert-knowledge-based-on-search-space (reference label)"><span>Expert knowledge based on search space</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Knowledge-base-of-required-and-forbidden-edges" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/examples/expert_knowledge.ipynb#knowledge-base-of-required-and-forbidden-edges (reference label)"><span>Knowledge base of required and forbidden edges</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples.html#parameter-estimation" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="parameter estimation (reference label)"><span>Parameter Estimation</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples.html#probabilistic-inference" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="probabilistic inference (reference label)"><span>Probabilistic Inference</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples.html#causal-inference" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples.rst#causal-inference (reference label)"><span>Causal Inference</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples.html#simulations" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples.rst#simulations (reference label)"><span>Simulations</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples.html#extending-pgmpy" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="extending pgmpy (reference label)"><span>Extending pgmpy</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/api.rst (reference label)"><span>API Reference</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/development.rst (reference label)"><span>Development</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/examples/expert_knowledge.ipynb (reference label)"><span>Expert Knowledge Integration with Causal Discovery</span></span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Temporal-Order-with-PC-Algorithm" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/examples/expert_knowledge.ipynb#temporal-order-with-pc-algorithm (reference label)"><span>Temporal Order with PC Algorithm</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Expert-knowledge-based-on-search-space" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/examples/expert_knowledge.ipynb#expert-knowledge-based-on-search-space (reference label)"><span>Expert knowledge based on search space</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Knowledge-base-of-required-and-forbidden-edges" class="md-nav__link">
+    
+    <span class="md-ellipsis">
+      <span title="/examples/expert_knowledge.ipynb#knowledge-base-of-required-and-forbidden-edges (reference label)"><span>Knowledge base of required and forbidden edges</span></span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+  
+                  
+
+
+<h1 id="Expert-Knowledge-Integration-with-Causal-Discovery">Expert Knowledge Integration with Causal Discovery<a class="headerlink" href="#Expert-Knowledge-Integration-with-Causal-Discovery" title="Link to this heading">¶</a></h1>
+<p>Causal Discovery (aka. Structure learning) seeks to uncover the causal relationships among random variables from observational datasets. Methods like the PC algorithm and Hill-climb Search can be used for causal discovery, however, they often struggle to recover the correct causal relationships due to issues such as data not satisfying the assumptions of the method, limited data can lead to error, high compute time when there are many variables or the model is dense.</p>
+<p>Incorporating expert knowledge can greatly improve the accuracy of these methods, as well as reduce the computational cost as it constrains the search space for these algorithms. pgmpy currently has the following options to specify expert knowledge:</p>
+<ul class="simple">
+<li><p><strong>Temporal Order / Tier information</strong>: Specify the tiers/temporal order for sets of variables.</p></li>
+<li><p><strong>Search Space</strong>: Specify the set of edges that the algorithms should search through.</p></li>
+<li><p><strong>Forbidden Edges</strong>: Edges that should not be present in the final model.</p></li>
+<li><p><strong>Required Edges</strong>: Edges that must be present in the final model.</p></li>
+</ul>
+<p>This tutorial walks through examples of specifying expert knowledge with the causal discovery algorithms implemented in pgmpy. Expert knowledge is supported in pgmpy with the following algorithms:</p>
+<ul class="simple">
+<li><p><strong>PC</strong></p></li>
+<li><p><strong>Hill Climb Search</strong></p></li>
+<li><p><strong>GES</strong></p></li>
+<li><p><strong>ExpertInLoop</strong></p></li>
+</ul>
+<p>The models used in this notebook are described in detail at <a class="reference external" href="https://www.bnlearn.com/bnrepository/">the bnlearn repository</a>.</p>
+<h2 id="Temporal-Order-with-PC-Algorithm">Temporal Order with PC Algorithm<a class="headerlink" href="#Temporal-Order-with-PC-Algorithm" title="Link to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[1]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Imports and configuration</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_example_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.global_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span>
+
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_backend</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Load an example model and simulate data from it.</span>
+<span class="n">cancer</span> <span class="o">=</span> <span class="n">get_example_model</span><span class="p">(</span><span class="s2">&quot;cancer&quot;</span><span class="p">)</span>
+<span class="n">cancer_samples</span> <span class="o">=</span> <span class="n">cancer</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Plot the `cancer` model</span>
+<span class="n">diag</span> <span class="o">=</span> <span class="n">cancer</span><span class="o">.</span><span class="n">to_graphviz</span><span class="p">()</span>
+<span class="n">diag</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f12b3917ef2e45f9b0f0de13fbd37c2d", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_4_1.svg" src="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_4_1.svg" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Run the standard PC algorithm and plot the results</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.estimators</span><span class="w"> </span><span class="kn">import</span> <span class="n">PC</span><span class="p">,</span> <span class="n">ExpertKnowledge</span>
+
+<span class="n">learned_model</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">cancer_samples</span><span class="p">)</span><span class="o">.</span><span class="n">estimate</span><span class="p">()</span>
+
+<span class="n">diag</span> <span class="o">=</span> <span class="n">learned_model</span><span class="o">.</span><span class="n">to_graphviz</span><span class="p">()</span>
+<span class="n">diag</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "22ce028ac25e4fb28411fa5bc2ac1997", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_5_1.svg" src="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_5_1.svg" />
+</div>
+</div>
+<p>As seen from the learned model, the PC algorithm was not able to correctly recover the original data-generating DAG.</p>
+<p>Now, we know that smoking (<code class="docutils literal notranslate"><span class="pre">Smoker</span></code>) and air pollution (<code class="docutils literal notranslate"><span class="pre">Pollution</span></code>) contribute to lung cancer (<code class="docutils literal notranslate"><span class="pre">Cancer</span></code>). Also, breathing difficulties (<code class="docutils literal notranslate"><span class="pre">Dyspnoea</span></code>) and a positive X-ray report (<code class="docutils literal notranslate"><span class="pre">Xray</span></code>) contribute to a cancer diagnosis (effect), so they cannot be the initial causes in this scenario. Based on this, we can craft a temporal order where the causes of cancer are at a higher temporal order, while the effects are lumped together at the end.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># PC algorithm with the temporal knowledge.</span>
+
+<span class="n">expert_knowledge</span> <span class="o">=</span> <span class="n">ExpertKnowledge</span><span class="p">(</span>
+    <span class="n">temporal_order</span><span class="o">=</span><span class="p">[[</span><span class="s2">&quot;Pollution&quot;</span><span class="p">,</span> <span class="s2">&quot;Smoker&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Cancer&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Dyspnoea&quot;</span><span class="p">,</span> <span class="s2">&quot;Xray&quot;</span><span class="p">]]</span>
+<span class="p">)</span>
+
+<span class="n">est_model</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">cancer_samples</span><span class="p">)</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">expert_knowledge</span><span class="o">=</span><span class="n">expert_knowledge</span><span class="p">)</span>
+
+<span class="n">diag</span> <span class="o">=</span> <span class="n">est_model</span><span class="o">.</span><span class="n">to_graphviz</span><span class="p">()</span>
+<span class="n">diag</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e26c8f630ac94230b2a3d30c64511087", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_7_1.svg" src="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_7_1.svg" />
+</div>
+</div>
+<p>Note: Using any form of expert knowledge, especially with PC, is sensitive to the accuracy of the knowledge.</p>
+<h2 id="Expert-knowledge-based-on-search-space">Expert knowledge based on search space<a class="headerlink" href="#Expert-knowledge-based-on-search-space" title="Link to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Load the Asia model and simulate data (https://www.bnlearn.com/bnrepository/discrete-small.html#asia)</span>
+<span class="n">asia</span> <span class="o">=</span> <span class="n">get_example_model</span><span class="p">(</span><span class="s2">&quot;asia&quot;</span><span class="p">)</span>
+<span class="n">asia_samples</span> <span class="o">=</span> <span class="n">asia</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">diag</span> <span class="o">=</span> <span class="n">asia</span><span class="o">.</span><span class="n">to_graphviz</span><span class="p">()</span>
+<span class="n">diag</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "22c18d7324bf42158d08524faac44a58", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_10_1.svg" src="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_10_1.svg" />
+</div>
+</div>
+<p>The idea with the search space is that it is usually difficult to distinguish between direct and indirect effects. For example, in the above Asia model, we might know that <code class="docutils literal notranslate"><span class="pre">smoke</span></code> would have a causal effect on <code class="docutils literal notranslate"><span class="pre">dysp</span></code> but might not exactly know through which pathways. With the search space, we try to specify a hypergraph over our variables such that we specify a causal edge between any two variables that we think should have a causal relationship, but aren’t sure about the causal path/edges.</p>
+<p>As an example, for the <code class="docutils literal notranslate"><span class="pre">asia</span></code> model, we can consider additional edges from all three diseases (<code class="docutils literal notranslate"><span class="pre">tub</span></code>, <code class="docutils literal notranslate"><span class="pre">lung</span></code>, and <code class="docutils literal notranslate"><span class="pre">bronc</span></code>) to both the symptoms (<code class="docutils literal notranslate"><span class="pre">xray</span></code> and <code class="docutils literal notranslate"><span class="pre">dysp</span></code>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">SHD</span>
+
+<span class="n">search_space</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;smoke&quot;</span><span class="p">,</span> <span class="s2">&quot;cancer&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;smoke&quot;</span><span class="p">,</span> <span class="s2">&quot;lung&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;smoke&quot;</span><span class="p">,</span> <span class="s2">&quot;tub&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;tub&quot;</span><span class="p">,</span> <span class="s2">&quot;asia&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;asia&quot;</span><span class="p">,</span> <span class="s2">&quot;tub&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;tub&quot;</span><span class="p">,</span> <span class="s2">&quot;either&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;lung&quot;</span><span class="p">,</span> <span class="s2">&quot;either&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;bronc&quot;</span><span class="p">,</span> <span class="s2">&quot;either&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;tub&quot;</span><span class="p">,</span> <span class="s2">&quot;xray&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;tub&quot;</span><span class="p">,</span> <span class="s2">&quot;dysp&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;lung&quot;</span><span class="p">,</span> <span class="s2">&quot;x-ray&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;lung&quot;</span><span class="p">,</span> <span class="s2">&quot;dysp&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;bronc&quot;</span><span class="p">,</span> <span class="s2">&quot;xray&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;bronc&quot;</span><span class="p">,</span> <span class="s2">&quot;dysp&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;either&quot;</span><span class="p">,</span> <span class="s2">&quot;xray&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;either&quot;</span><span class="p">,</span> <span class="s2">&quot;dysp&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;tub&quot;</span><span class="p">,</span> <span class="s2">&quot;dysp&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">expert_knowledge</span> <span class="o">=</span> <span class="n">ExpertKnowledge</span><span class="p">(</span><span class="n">search_space</span><span class="o">=</span><span class="n">search_space</span><span class="p">)</span>
+
+<span class="n">est_model</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">asia_samples</span><span class="p">)</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">expert_knowledge</span><span class="o">=</span><span class="n">expert_knowledge</span><span class="p">,</span> <span class="n">ci_test</span><span class="o">=</span><span class="s1">&#39;pillai&#39;</span><span class="p">,</span> <span class="n">enforce_expert_knowledge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">SHD</span><span class="p">(</span><span class="n">asia</span><span class="p">,</span> <span class="n">est_model</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5d011a252da542e2b86c84964a3635bd", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+8
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Plot the estimated model</span>
+
+<span class="n">diag</span> <span class="o">=</span> <span class="n">est_model</span><span class="o">.</span><span class="n">to_graphviz</span><span class="p">()</span>
+<span class="n">diag</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_13_0.svg" src="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_13_0.svg" />
+</div>
+</div>
+<h2 id="Knowledge-base-of-required-and-forbidden-edges">Knowledge base of required and forbidden edges<a class="headerlink" href="#Knowledge-base-of-required-and-forbidden-edges" title="Link to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">child</span> <span class="o">=</span> <span class="n">get_example_model</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">)</span>
+<span class="n">child_samples</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">diag</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="n">to_graphviz</span><span class="p">()</span>
+<span class="n">diag</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c2e6b6fc46b547369d2ec99db880478b", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_15_1.svg" src="../../../pgmpy_docs/doctrees/nbsphinx/examples_Expert_Knowledge_15_1.svg" />
+</div>
+</div>
+<p>Based on similar reasoning as in the first section, we can now create a knowledge base consisting of forbidden and required edges. For example, having birth asphyxia (‘Disease’) directly contributes to the 6 subclassses/markers of disease (‘LVH’, ‘LungParench’ etc.). It is the root cause, so it cannot have incoming edges from any of these nodes. Similarly, the CO2 level (‘CO2’) affects the CO2 report (‘CO2Report’), and not the other way around.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">required_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;CO2&quot;</span><span class="p">,</span> <span class="s2">&quot;CO2Report&quot;</span><span class="p">),</span>
+                  <span class="p">(</span><span class="s2">&quot;ChestXray&quot;</span><span class="p">,</span> <span class="s2">&quot;XrayReport&quot;</span><span class="p">),</span>
+                  <span class="p">(</span><span class="s2">&quot;LVH&quot;</span><span class="p">,</span> <span class="s2">&quot;LVHreport&quot;</span><span class="p">),</span>
+                  <span class="p">(</span><span class="s2">&quot;Gruntin&quot;</span><span class="p">,</span> <span class="s2">&quot;GruntingReport&quot;</span><span class="p">)]</span>
+<span class="c1"># As disease should be an exogenous node, do not allow any incoming edges except `BirthAsphyxia&#39;.</span>
+<span class="n">forbidden_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">nodes</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;Disease&#39;</span><span class="p">]</span>
+
+<span class="n">expert_knowledge</span> <span class="o">=</span> <span class="n">ExpertKnowledge</span><span class="p">(</span>
+    <span class="n">required_edges</span><span class="o">=</span><span class="n">required_edges</span><span class="p">,</span> <span class="n">forbidden_edges</span><span class="o">=</span><span class="n">forbidden_edges</span>
+<span class="p">)</span>
+<span class="n">est_model</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">child_samples</span><span class="p">)</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">expert_knowledge</span><span class="o">=</span><span class="n">expert_knowledge</span><span class="p">,</span> <span class="n">ci_test</span><span class="o">=</span><span class="s1">&#39;pillai&#39;</span><span class="p">,</span> <span class="n">enforce_expert_knowledge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">SHD</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">est_model</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1697474157f046a6b2cbe6f71f7fcde1", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[9], line 11</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> forbidden_edges <span style="color: rgb(98,98,98)">=</span> [(u, v) <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> u, v <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> itertools<span style="color: rgb(98,98,98)">.</span>combinations(child<span style="color: rgb(98,98,98)">.</span>nodes(), <span style="color: rgb(98,98,98)">2</span>) <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> v <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">Disease</span><span style="color: rgb(175,0,0)">&#39;</span>]
+<span class="ansi-green-intense-fg ansi-bold">      8</span> expert_knowledge <span style="color: rgb(98,98,98)">=</span> ExpertKnowledge(
+<span class="ansi-green-intense-fg ansi-bold">      9</span>     required_edges<span style="color: rgb(98,98,98)">=</span>required_edges, forbidden_edges<span style="color: rgb(98,98,98)">=</span>forbidden_edges
+<span class="ansi-green-intense-fg ansi-bold">     10</span> )
+<span class="ansi-green-fg">---&gt; 11</span> est_model <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">PC</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">child_samples</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">estimate</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">expert_knowledge</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">expert_knowledge</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">ci_test</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">pillai</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">enforce_expert_knowledge</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">True</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> SHD(child, est_model)
+
+File <span class="ansi-green-fg">~/pgmpy/examples/pgmpy/estimators/PC.py:241</span>, in <span class="ansi-cyan-fg">PC.estimate</span><span class="ansi-blue-fg">(self, variant, ci_test, return_type, significance_level, max_cond_vars, expert_knowledge, enforce_expert_knowledge, n_jobs, show_progress, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    238</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> skel, separating_sets
+<span class="ansi-green-intense-fg ansi-bold">    240</span> <span style="color: rgb(95,135,135)"># Step 2: Orient the edges based on collider structures.</span>
+<span class="ansi-green-fg">--&gt; 241</span> pdag <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">orient_colliders</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">    242</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">skel</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">separating_sets</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">expert_knowledge</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">temporal_ordering</span>
+<span class="ansi-green-intense-fg ansi-bold">    243</span> <span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    245</span> <span style="color: rgb(95,135,135)"># Step 3: Either return the CPDAG, integrate expert knowledge or fully orient the edges to build a DAG.</span>
+<span class="ansi-green-intense-fg ansi-bold">    246</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> expert_knowledge<span style="color: rgb(98,98,98)">.</span>temporal_order <span style="color: rgb(98,98,98)">!=</span> [[]]:
+
+File <span class="ansi-green-fg">~/pgmpy/examples/pgmpy/estimators/PC.py:548</span>, in <span class="ansi-cyan-fg">PC.orient_colliders</span><span class="ansi-blue-fg">(skeleton, separating_sets, temporal_ordering)</span>
+<span class="ansi-green-intense-fg ansi-bold">    546</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> skeleton<span style="color: rgb(98,98,98)">.</span>has_edge(X, Y):
+<span class="ansi-green-intense-fg ansi-bold">    547</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> Z <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">set</span>(skeleton<span style="color: rgb(98,98,98)">.</span>neighbors(X)) <span style="color: rgb(98,98,98)">&amp;</span> <span style="color: rgb(0,135,0)">set</span>(skeleton<span style="color: rgb(98,98,98)">.</span>neighbors(Y)):
+<span class="ansi-green-fg">--&gt; 548</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> Z <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span class="ansi-yellow-bg">separating_sets</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">frozenset</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">X</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">Y</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">]</span>:
+<span class="ansi-green-intense-fg ansi-bold">    549</span>             <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> (temporal_ordering <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(0,135,0)">dict</span>()) <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> (
+<span class="ansi-green-intense-fg ansi-bold">    550</span>                 (temporal_ordering[Z] <span style="color: rgb(98,98,98)">&gt;</span><span style="color: rgb(98,98,98)">=</span> temporal_ordering[X])
+<span class="ansi-green-intense-fg ansi-bold">    551</span>                 <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> (temporal_ordering[Z] <span style="color: rgb(98,98,98)">&gt;</span><span style="color: rgb(98,98,98)">=</span> temporal_ordering[Y])
+<span class="ansi-green-intense-fg ansi-bold">    552</span>             ):
+<span class="ansi-green-intense-fg ansi-bold">    553</span>                 pdag<span style="color: rgb(98,98,98)">.</span>remove_edges_from([(Z, X), (Z, Y)])
+
+<span class="ansi-red-fg">KeyError</span>: frozenset({&#39;Disease&#39;, &#39;CO2&#39;})
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Plot the estimated model</span>
+
+<span class="n">diag</span> <span class="o">=</span> <span class="n">est_model</span><span class="o">.</span><span class="n">to_graphviz</span><span class="p">()</span>
+<span class="n">diag</span><span class="o">.</span><span class="n">layout</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  <div data-ea-publisher="pgmpyorg" data-ea-type="image" data-ea-style="stickybox"></div>
+  <script>
+    (function() {
+      var nav = document.querySelector('.md-header__inner');
+      if (!nav) return;
+
+      var socialDiv = document.createElement('div');
+      socialDiv.className = 'md-header__social';
+
+      socialDiv.innerHTML =
+        '<a href="https://github.com/pgmpy/pgmpy" target="_blank" rel="noopener" title="GitHub">' +
+          '<svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">' +
+            '<path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.8-14.9-112.8-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>' +
+          '</svg>' +
+        '</a>' +
+        '<a href="https://discord.gg/DRkdKaumBs" target="_blank" rel="noopener" title="Discord">' +
+          '<svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">' +
+            '<path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91A483.689 483.689 0 0 0 116.085 69.137a1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375A487.666 487.666 0 0 0 176.02 479.918a1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126c3.082-2.309 6.166-4.711 9.109-7.137a1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233c2.944 2.426 6.027 4.851 9.132 7.16a1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352C623.729 277.594 590.933 167.465 524.531 69.836zM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239S193.056 219.1 222.491 219.1c29.665 0 53.306 26.82 52.843 59.239C275.334 310.993 251.924 337.58 222.491 337.58zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239S388.437 219.1 417.871 219.1c29.667 0 53.307 26.82 52.844 59.239C470.715 310.993 447.538 337.58 417.871 337.58z"/>' +
+          '</svg>' +
+        '</a>' +
+        '<a href="https://www.linkedin.com/company/pgmpy/" target="_blank" rel="noopener" title="LinkedIn">' +
+          '<svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">' +
+            '<path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>' +
+          '</svg>' +
+        '</a>';
+
+      nav.appendChild(socialDiv);
+    })();
+  </script>
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025, Ankur Ankan.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    9.1.0.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "search.highlight", "search.share", "toc.follow", "content.tabs.link"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike", "staticVersions": [{"aliases": [], "title": "1.0.0 (stable)", "version": "https://pgmpy.org"}, {"aliases": [], "title": "dev", "version": "https://pgmpy.org/dev"}], "versionPath": null}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

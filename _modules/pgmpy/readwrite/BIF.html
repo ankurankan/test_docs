@@ -1,0 +1,1285 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../_static/logo_favi.ico">
+    
+    
+      
+        <title>pgmpy.readwrite.BIF - pgmpy</title>
+      
+    
+    
+      
+        
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.acf80fe7f4d9ef9e2.min.css?v=9e56d0d2" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  
+  <!-- SEO meta tags -->
+  <meta name="description" content="pgmpy: A Python library for causal inference and probabilistic inference using Directed Acyclic Graphs (DAGs) and Bayesian Networks.">
+  <meta name="keywords" content="pgmpy, Bayesian Networks, causal inference, probabilistic graphical models, structure learning, parameter estimation, Python">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="pgmpy">
+  <meta property="og:title" content="pgmpy.readwrite.BIF">
+  <meta property="og:description" content="pgmpy: A Python library for causal inference and probabilistic inference using Directed Acyclic Graphs (DAGs) and Bayesian Networks.">
+  <meta property="og:url" content="https://pgmpy.org/_modules/pgmpy/readwrite/BIF.html">
+  <meta property="og:image" content="https://pgmpy.org/_static/logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="pgmpy.readwrite.BIF">
+  <meta name="twitter:description" content="pgmpy: A Python library for causal inference and probabilistic inference using Directed Acyclic Graphs (DAGs) and Bayesian Networks.">
+  <meta name="twitter:image" content="https://pgmpy.org/_static/logo.png">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HCFR07M31W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HCFR07M31W');
+  </script>
+  <!-- EthicalAds -->
+  <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+  <!-- Header social links styling -->
+  <style>
+    .md-header__social {
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+      margin-left: 0.4rem;
+    }
+    .md-header__social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem;
+      color: var(--md-default-fg-color--light);
+      opacity: 0.7;
+      transition: opacity 0.25s;
+    }
+    .md-header__social a:hover {
+      opacity: 1;
+    }
+    .md-header__social svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      fill: currentColor;
+    }
+    [data-md-color-scheme="slate"] .md-header__social a {
+      color: var(--md-default-fg-color--light);
+    }
+    /* Center content when right sidebar (toc) is hidden */
+    .md-sidebar--secondary[hidden] ~ .md-content {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="pgmpy" class="md-header__button md-logo" aria-label="pgmpy" data-md-component="logo">
+      <img src="../../../_static/logo.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            pgmpy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              pgmpy.readwrite.BIF
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pgmpy/pgmpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pgmpy/pgmpy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../started/base.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/started/base.rst (reference label)"><span>Getting Started</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../documentation.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/documentation.rst (reference label)"><span>Documentation</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../examples.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/examples.rst (reference label)"><span>Examples</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../api.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/api.rst (reference label)"><span>API Reference</span></span>
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../development.html" class="md-tabs__link">
+        
+  
+    
+  
+  <span title="/development.rst (reference label)"><span>Development</span></span>
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="pgmpy" class="md-nav__button md-logo" aria-label="pgmpy" data-md-component="logo">
+      <img src="../../../_static/logo.png" alt="logo">
+    </a>
+    pgmpy
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pgmpy/pgmpy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pgmpy/pgmpy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../started/base.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/started/base.rst (reference label)"><span>Getting Started</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../documentation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/documentation.rst (reference label)"><span>Documentation</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/examples.rst (reference label)"><span>Examples</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/api.rst (reference label)"><span>API Reference</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../development.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    <span title="/development.rst (reference label)"><span>Development</span></span>
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                
+                
+  
+                  
+
+
+<h1>Source code for pgmpy.readwrite.BIF</h1><div class="highlight"><pre>
+<span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">string</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyparsing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pp</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyparsing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+        <span class="n">CharsNotIn</span><span class="p">,</span>
+        <span class="n">Group</span><span class="p">,</span>
+        <span class="n">OneOrMore</span><span class="p">,</span>
+        <span class="n">Optional</span><span class="p">,</span>
+        <span class="n">Suppress</span><span class="p">,</span>
+        <span class="n">Word</span><span class="p">,</span>
+        <span class="n">ZeroOrMore</span><span class="p">,</span>
+        <span class="n">nums</span><span class="p">,</span>
+        <span class="n">printables</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. pyparsing is required for using read/write methods. Please install using: pip install pyparsing.&quot;</span>
+    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.factors.discrete</span><span class="w"> </span><span class="kn">import</span> <span class="n">TabularCPD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.global_vars</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiscreteBayesianNetwork</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pgmpy.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">compat_fns</span>
+
+
+<div class="viewcode-block" id="BIFReader">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFReader">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BIFReader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes a BIFReader object.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path : file or str</span>
+<span class="sd">        File of bif data</span>
+
+<span class="sd">    string : str</span>
+<span class="sd">        String of bif data</span>
+
+<span class="sd">    include_properties: boolean</span>
+<span class="sd">        If True, gets the properties tag from the file and stores in graph properties.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # dog-problem.bif file is present at</span>
+<span class="sd">    &gt;&gt;&gt; # http://www.cs.cmu.edu/~javabayes/Examples/DogProblem/dog-problem.bif</span>
+<span class="sd">    &gt;&gt;&gt; from pgmpy.readwrite import BIFReader</span>
+<span class="sd">    &gt;&gt;&gt; reader = BIFReader(&quot;bif_test.bif&quot;)</span>
+<span class="sd">    &lt;pgmpy.readwrite.BIF.BIFReader object at 0x7f2375621cf8&gt;</span>
+<span class="sd">    &gt;&gt;&gt; model = reader.get_model()</span>
+
+<span class="sd">    Reference</span>
+<span class="sd">    ---------</span>
+<span class="sd">    [1] Geoff Hulten and Pedro Domingos. The interchange format for bayesian networks.</span>
+<span class="sd">        http://www.cs.washington.edu/dm/vfml/appendixes/bif.htm, 2003.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_properties</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">path</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">network</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">network</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="n">string</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network</span> <span class="o">=</span> <span class="n">string</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must specify either path or string&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">include_properties</span> <span class="o">=</span> <span class="n">include_properties</span>
+
+        <span class="k">if</span> <span class="s2">&quot;/*&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span> <span class="ow">or</span> <span class="s2">&quot;//&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="p">:</span>
+            <span class="c1"># removing comments from the file</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(&quot;[^&quot;</span><span class="se">\\</span><span class="s1">]*(?:</span><span class="se">\\</span><span class="s1">.[^&quot;</span><span class="se">\\</span><span class="s1">]*)*&quot;)|(/\*.*?\*/|//[^\n]*)&#39;</span>
+            <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="p">:</span>
+            <span class="c1"># Replacing quotes by spaces to remove case sensitivity like:</span>
+            <span class="c1"># &quot;Dog-Problem&quot; and Dog-problem</span>
+            <span class="c1"># or &quot;true&quot;&quot;false&quot; and &quot;true&quot; &quot;false&quot; and true false</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+        <span class="p">(</span>
+            <span class="n">name_expr</span><span class="p">,</span>
+            <span class="n">state_expr</span><span class="p">,</span>
+            <span class="n">property_expr</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable_grammar</span><span class="p">()</span>
+        <span class="n">probability_expr</span><span class="p">,</span> <span class="n">cpd_expr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_probability_grammar</span><span class="p">()</span>
+
+        <span class="c1"># self.get_network_name()</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;network\s+([\w-]+)\s*\{&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">network_name</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">match</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="n">block_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(variable|probability).*?\}\n&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_properties</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variable_properties</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">probability_blocks</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">block_pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">network</span><span class="p">):</span>
+            <span class="n">block_content</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># self.get_variables(), self.get_states(), self.get_property()</span>
+            <span class="k">if</span> <span class="n">block_content</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;variable&quot;</span><span class="p">):</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">name_expr</span><span class="o">.</span><span class="n">search_string</span><span class="p">(</span><span class="n">block_content</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+                    <span class="n">state_expr</span><span class="o">.</span><span class="n">search_string</span><span class="p">(</span><span class="n">block_content</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_properties</span><span class="p">:</span>
+                    <span class="n">properties</span> <span class="o">=</span> <span class="n">property_expr</span><span class="o">.</span><span class="n">search_string</span><span class="p">(</span><span class="n">block_content</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">variable_properties</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="n">y</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">properties</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span>
+                    <span class="p">]</span>
+
+            <span class="c1"># self.get_parents(), self.get_edges()</span>
+            <span class="k">elif</span> <span class="n">block_content</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;probability&quot;</span><span class="p">):</span>
+                <span class="n">header_line</span> <span class="o">=</span> <span class="n">block_content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="n">probability_expr</span><span class="o">.</span><span class="n">search_string</span><span class="p">(</span><span class="n">header_line</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">var_name</span><span class="p">,</span> <span class="n">parents</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">names</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">parents</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable_edges</span><span class="o">.</span><span class="n">extend</span><span class="p">([[</span><span class="n">p</span><span class="p">,</span> <span class="n">var_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parents</span><span class="p">])</span>
+                <span class="n">probability_blocks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">block_content</span><span class="p">,</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">parents</span><span class="p">))</span>
+
+        <span class="c1"># self.get_values()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_cpds</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">state_maps</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">var</span><span class="p">:</span> <span class="p">{</span><span class="n">state</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">)}</span>
+            <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">states</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">block_content</span><span class="p">,</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">parents</span> <span class="ow">in</span> <span class="n">probability_blocks</span><span class="p">:</span>
+            <span class="n">cpds_list</span> <span class="o">=</span> <span class="n">cpd_expr</span><span class="o">.</span><span class="n">search_string</span><span class="p">(</span><span class="n">block_content</span><span class="p">)</span>
+            <span class="n">n_rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">var_name</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;table &quot;</span> <span class="ow">in</span> <span class="n">block_content</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;default &quot;</span> <span class="ow">in</span> <span class="n">block_content</span><span class="p">):</span>
+                <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cpds_list</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+                <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable_cpds</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">parent_cards</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">p</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parents</span><span class="p">]</span>
+                <span class="n">arr_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">parent_cards</span><span class="p">))</span>
+                <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">arr_length</span><span class="p">))</span>
+
+                <span class="n">len_parents</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpds_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cpds_list</span><span class="p">)</span>
+
+                    <span class="n">state_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="n">len_parents</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="n">values_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">len_parents</span><span class="p">:]</span>
+
+                    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">parent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parents</span><span class="p">):</span>
+                        <span class="n">col</span> <span class="o">=</span> <span class="n">state_df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                        <span class="n">state_df</span> <span class="o">=</span> <span class="n">state_df</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="n">col</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">})</span>
+                        <span class="n">state_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">state_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+                            <span class="n">state_maps</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+                        <span class="p">)</span>
+
+                    <span class="n">strides</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">parent_cards</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])[:</span><span class="o">-</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">col_indices</span> <span class="o">=</span> <span class="n">state_df</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">strides</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+                    <span class="n">arr</span><span class="p">[:,</span> <span class="n">col_indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">values_df</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variable_cpds</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span>
+
+<div class="viewcode-block" id="BIFReader.get_variable_grammar">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFReader.get_variable_grammar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variable_grammar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A method that returns variable grammar</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Defining an expression for valid word</span>
+        <span class="n">word_expr</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">unicode</span><span class="o">.</span><span class="n">alphanums</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="n">word_expr2</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="n">init_chars</span><span class="o">=</span><span class="n">printables</span><span class="p">,</span> <span class="n">exclude_chars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">])</span>
+        <span class="n">name_expr</span> <span class="o">=</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;variable&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">word_expr</span> <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">)</span>
+        <span class="n">state_expr</span> <span class="o">=</span> <span class="n">ZeroOrMore</span><span class="p">(</span><span class="n">word_expr2</span> <span class="o">+</span> <span class="n">Optional</span><span class="p">(</span><span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
+        <span class="c1"># Defining a variable state expression</span>
+        <span class="n">variable_state_expr</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="n">word_expr</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="n">Word</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Group</span><span class="p">(</span><span class="n">state_expr</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># variable states is of the form type description [args] { val1, val2 }; (comma may or may not be present)</span>
+
+        <span class="n">property_expr</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;property&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">CharsNotIn</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># Creating an expr to find property</span>
+
+        <span class="k">return</span> <span class="n">name_expr</span><span class="p">,</span> <span class="n">variable_state_expr</span><span class="p">,</span> <span class="n">property_expr</span></div>
+
+
+<div class="viewcode-block" id="BIFReader.get_probability_grammar">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFReader.get_probability_grammar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_probability_grammar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A method that returns probability grammar</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Creating valid word expression for probability, it is of the format</span>
+        <span class="c1"># wor1 | var2 , var3 or var1 var2 var3 or simply var</span>
+        <span class="n">word_expr</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Word</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">unicode</span><span class="o">.</span><span class="n">alphanums</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">))</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">word_expr2</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span>
+            <span class="n">init_chars</span><span class="o">=</span><span class="n">printables</span><span class="p">,</span> <span class="n">exclude_chars</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;(&quot;</span><span class="p">]</span>
+        <span class="p">)</span> <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+        <span class="c1"># creating an expression for valid numbers, of the format</span>
+        <span class="c1"># 1.00 or 1 or 1.00. 0.00 or 9.8e-5 etc</span>
+        <span class="n">num_expr</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="n">nums</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span> <span class="o">+</span> <span class="s2">&quot;e&quot;</span> <span class="o">+</span> <span class="s2">&quot;E&quot;</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="n">Optional</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+        <span class="n">probability_expr</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;probability&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">OneOrMore</span><span class="p">(</span><span class="n">word_expr</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">optional_expr</span> <span class="o">=</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">OneOrMore</span><span class="p">(</span><span class="n">word_expr2</span><span class="p">)</span> <span class="o">+</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">)</span>
+        <span class="n">probab_attributes</span> <span class="o">=</span> <span class="n">optional_expr</span> <span class="o">|</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">Suppress</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+        <span class="n">cpd_expr</span> <span class="o">=</span> <span class="n">probab_attributes</span> <span class="o">+</span> <span class="n">OneOrMore</span><span class="p">(</span><span class="n">num_expr</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">probability_expr</span><span class="p">,</span> <span class="n">cpd_expr</span></div>
+
+
+<div class="viewcode-block" id="BIFReader.get_model">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFReader.get_model">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_name_type</span><span class="o">=</span><span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the Bayesian Model read from the file/str.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state_name_type: int, str or bool (default: str)</span>
+<span class="sd">            The data type to which to convert the state names of the variables.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        ----------</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.readwrite import BIFReader</span>
+<span class="sd">        &gt;&gt;&gt; reader = BIFReader(&quot;bif_test.bif&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; reader.get_model()</span>
+<span class="sd">        &lt;pgmpy.models.DiscreteBayesianNetwork.DiscreteBayesianNetwork object at 0x7f20af154320&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">DiscreteBayesianNetwork</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_names</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_edges</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">network_name</span>
+
+        <span class="n">tabular_cpds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_cpds</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_cpds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+            <span class="n">sn</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">p_var</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">state_name_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">p_var</span><span class="p">]))</span>
+                <span class="k">for</span> <span class="n">p_var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="n">sn</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">state_name_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">var</span><span class="p">]))</span>
+            <span class="n">cpd</span> <span class="o">=</span> <span class="n">TabularCPD</span><span class="p">(</span>
+                <span class="n">var</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">var</span><span class="p">]),</span>
+                <span class="n">values</span><span class="p">,</span>
+                <span class="n">evidence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span><span class="p">[</span><span class="n">var</span><span class="p">],</span>
+                <span class="n">evidence_card</span><span class="o">=</span><span class="p">[</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">evidence_var</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">evidence_var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+                <span class="p">],</span>
+                <span class="n">state_names</span><span class="o">=</span><span class="n">sn</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">tabular_cpds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cpd</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">add_cpds</span><span class="p">(</span><span class="o">*</span><span class="n">tabular_cpds</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_properties</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">properties</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">:</span>
+                    <span class="n">prop_name</span><span class="p">,</span> <span class="n">prop_value</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">prop</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">))</span>
+                    <span class="n">model</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">prop_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">prop_value</span>
+
+        <span class="k">return</span> <span class="n">model</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BIFWriter">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BIFWriter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initialise a BIFWriter Object</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model: DiscreteBayesianNetwork Instance</span>
+
+<span class="sd">    round_values: int (default: None)</span>
+<span class="sd">        Round the probability values to `round_values` decimals. If None, keeps all decimal points.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ---------</span>
+<span class="sd">    &gt;&gt;&gt; from pgmpy.readwrite import BIFWriter</span>
+<span class="sd">    &gt;&gt;&gt; from pgmpy.utils import get_example_model</span>
+<span class="sd">    &gt;&gt;&gt; asia = get_example_model(&quot;asia&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; writer = BIFWriter(asia)</span>
+<span class="sd">    &gt;&gt;&gt; writer</span>
+<span class="sd">    &lt;writer_BIF.BIFWriter at 0x7f05e5ea27b8&gt;</span>
+<span class="sd">    &gt;&gt;&gt; writer.write(&quot;asia.bif&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">round_values</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">DiscreteBayesianNetwork</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;model must be an instance of DiscreteBayesianNetwork&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">round_values</span> <span class="o">=</span> <span class="n">round_values</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network_name</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_states</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">property_tag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_properties</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parents</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cpds</span><span class="p">()</span>
+
+<div class="viewcode-block" id="BIFWriter.BIF_templates">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter.BIF_templates">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BIF_templates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create template for writing in BIF format</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">network_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s2">&quot;network $name {</span><span class="se">\n</span><span class="s2">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># property tag may or may not be present in model,and since no of properties</span>
+        <span class="c1"># can be more than one, will replace them according to format otherwise null</span>
+        <span class="n">variable_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;variable $name {</span>
+<span class="sd">    type discrete [ $no_of_states ] { $states };</span>
+<span class="sd">$properties}\n&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="n">property_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s2">&quot;    property $prop ;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># $variable_ here is name of variable, used underscore for clarity</span>
+        <span class="n">probability_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;probability ( $variable_$separator_$parents ) {</span>
+<span class="sd">    table $values ;</span>
+<span class="sd">}\n&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">conditional_probability_template_total</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;probability ( $variable_$separator_$parents ) {</span>
+<span class="sd">$values</span>
+<span class="sd">}\n&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">conditional_probability_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;    ( $state ) $values;</span><span class="se">\n</span><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">network_template</span><span class="p">,</span>
+            <span class="n">variable_template</span><span class="p">,</span>
+            <span class="n">property_template</span><span class="p">,</span>
+            <span class="n">probability_template</span><span class="p">,</span>
+            <span class="n">conditional_probability_template_total</span><span class="p">,</span>
+            <span class="n">conditional_probability_template</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the BIF format as string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">(</span>
+            <span class="n">network_template</span><span class="p">,</span>
+            <span class="n">variable_template</span><span class="p">,</span>
+            <span class="n">property_template</span><span class="p">,</span>
+            <span class="n">probability_template</span><span class="p">,</span>
+            <span class="n">conditional_probability_template_total</span><span class="p">,</span>
+            <span class="n">conditional_probability_template</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">BIF_templates</span><span class="p">()</span>
+        <span class="n">network</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">network</span> <span class="o">+=</span> <span class="n">network_template</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">network_name</span><span class="p">)</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span>
+
+        <span class="n">sorted_variables</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">sorted_variables</span><span class="p">:</span>
+            <span class="n">no_of_states</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">var</span><span class="p">]))</span>
+            <span class="n">states</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_tag</span><span class="p">[</span><span class="n">var</span><span class="p">]:</span>
+                <span class="n">properties</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">properties</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">for</span> <span class="n">prop_val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">property_tag</span><span class="p">[</span><span class="n">var</span><span class="p">]:</span>
+                    <span class="n">properties</span> <span class="o">+=</span> <span class="n">property_template</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="n">prop_val</span><span class="p">)</span>
+            <span class="n">network</span> <span class="o">+=</span> <span class="n">variable_template</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">var</span><span class="p">,</span>
+                <span class="n">no_of_states</span><span class="o">=</span><span class="n">no_of_states</span><span class="p">,</span>
+                <span class="n">states</span><span class="o">=</span><span class="n">states</span><span class="p">,</span>
+                <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">sorted_variables</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span><span class="p">[</span><span class="n">var</span><span class="p">]:</span>
+                <span class="n">parents</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">separator</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">cpd</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">var</span><span class="p">]))</span>
+                <span class="n">network</span> <span class="o">+=</span> <span class="n">probability_template</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span>
+                    <span class="n">variable_</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">separator_</span><span class="o">=</span><span class="n">separator</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="n">parents</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">cpd</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">parents_str</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_parents</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
+                <span class="n">separator</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span>
+                <span class="n">cpd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_cpds</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+                <span class="n">cpd_values_transpose</span> <span class="o">=</span> <span class="n">cpd</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+
+                <span class="c1"># Get the sanitized state names for parents from self.variable_states</span>
+                <span class="n">parent_states</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span>
+                    <span class="o">*</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_states</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">cpd</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+                <span class="p">)</span>
+                <span class="n">all_cpd</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parent_states</span><span class="p">):</span>
+                    <span class="n">all_cpd</span> <span class="o">+=</span> <span class="n">conditional_probability_template</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span>
+                        <span class="n">state</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">state</span><span class="p">)),</span>
+                        <span class="n">values</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                            <span class="nb">map</span><span class="p">(</span>
+                                <span class="nb">str</span><span class="p">,</span>
+                                <span class="n">compat_fns</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span>
+                                    <span class="n">cpd_values_transpose</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="p">:],</span>
+                                    <span class="n">decimals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">round_values</span><span class="p">,</span>
+                                <span class="p">),</span>
+                            <span class="p">)</span>
+                        <span class="p">),</span>
+                    <span class="p">)</span>
+                <span class="n">network</span> <span class="o">+=</span> <span class="n">conditional_probability_template_total</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span>
+                    <span class="n">variable_</span><span class="o">=</span><span class="n">var</span><span class="p">,</span>
+                    <span class="n">separator_</span><span class="o">=</span><span class="n">separator</span><span class="p">,</span>
+                    <span class="n">parents</span><span class="o">=</span><span class="n">parents_str</span><span class="p">,</span>
+                    <span class="n">values</span><span class="o">=</span><span class="n">all_cpd</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">network</span>
+
+<div class="viewcode-block" id="BIFWriter.get_variables">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter.get_variables">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add variables to BIF</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list: a list containing names of variable</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.readwrite import BIFReader, BIFWriter</span>
+<span class="sd">        &gt;&gt;&gt; model = BIFReader(&quot;dog-problem.bif&quot;).get_model()</span>
+<span class="sd">        &gt;&gt;&gt; writer = BIFWriter(model)</span>
+<span class="sd">        &gt;&gt;&gt; writer.get_variables()</span>
+<span class="sd">        [&#39;bowel-problem&#39;, &#39;family-out&#39;, &#39;hear-bark&#39;, &#39;light-on&#39;, &#39;dog-out&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">variables</span></div>
+
+
+<div class="viewcode-block" id="BIFWriter.get_states">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter.get_states">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add states to variable of BIF, handling commas in state names by replacing them with underscores.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict: dict of type {variable: a list of states}</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.readwrite import BIFReader, BIFWriter</span>
+<span class="sd">        &gt;&gt;&gt; model = BIFReader(&quot;dog-problem.bif&quot;).get_model()</span>
+<span class="sd">        &gt;&gt;&gt; writer = BIFWriter(model)</span>
+<span class="sd">        &gt;&gt;&gt; writer.get_states()</span>
+<span class="sd">        {&#39;bowel-problem&#39;: [&#39;bowel-problem_0&#39;, &#39;bowel-problem_1&#39;],</span>
+<span class="sd">         &#39;dog-out&#39;: [&#39;dog-out_0&#39;, &#39;dog-out_1&#39;],</span>
+<span class="sd">         &#39;family-out&#39;: [&#39;family-out_0&#39;, &#39;family-out_1&#39;],</span>
+<span class="sd">         &#39;hear-bark&#39;: [&#39;hear-bark_0&#39;, &#39;hear-bark_1&#39;],</span>
+<span class="sd">         &#39;light-on&#39;: [&#39;light-on_0&#39;, &#39;light-on_1&#39;]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">variable_states</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">cpds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_cpds</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">cpd</span> <span class="ow">in</span> <span class="n">cpds</span><span class="p">:</span>
+            <span class="n">variable</span> <span class="o">=</span> <span class="n">cpd</span><span class="o">.</span><span class="n">variable</span>
+            <span class="n">variable_states</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">cpd</span><span class="o">.</span><span class="n">state_names</span><span class="p">[</span><span class="n">variable</span><span class="p">]:</span>
+                <span class="n">state_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+                <span class="c1"># Warn users if any commas in state names</span>
+                <span class="k">if</span> <span class="s2">&quot;,&quot;</span> <span class="ow">in</span> <span class="n">state_str</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;State name &#39;</span><span class="si">{</span><span class="n">state_str</span><span class="si">}</span><span class="s2">&#39; for variable &#39;</span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s2">&#39; contains commas. &quot;</span>
+                        <span class="s2">&quot;This may cause issues when loading the file. Consider removing any special characters.&quot;</span>
+                    <span class="p">)</span>
+                <span class="n">variable_states</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state_str</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">variable_states</span></div>
+
+
+<div class="viewcode-block" id="BIFWriter.get_properties">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter.get_properties">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add property to variables in BIF</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict: dict of type {variable: list of properties }</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.readwrite import BIFReader, BIFWriter</span>
+<span class="sd">        &gt;&gt;&gt; model = BIFReader(&quot;dog-problem.bif&quot;).get_model()</span>
+<span class="sd">        &gt;&gt;&gt; writer = BIFWriter(model)</span>
+<span class="sd">        &gt;&gt;&gt; writer.get_properties()</span>
+<span class="sd">        {&#39;bowel-problem&#39;: [&#39;position = (335, 99)&#39;],</span>
+<span class="sd">         &#39;dog-out&#39;: [&#39;position = (300, 195)&#39;],</span>
+<span class="sd">         &#39;family-out&#39;: [&#39;position = (257, 99)&#39;],</span>
+<span class="sd">         &#39;hear-bark&#39;: [&#39;position = (296, 268)&#39;],</span>
+<span class="sd">         &#39;light-on&#39;: [&#39;position = (218, 195)&#39;]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span>
+        <span class="n">property_tag</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">variables</span><span class="p">):</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span>
+            <span class="n">property_tag</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prop</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="p">]</span>
+        <span class="k">return</span> <span class="n">property_tag</span></div>
+
+
+<div class="viewcode-block" id="BIFWriter.get_parents">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter.get_parents">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_parents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add the parents to BIF</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict: dict of type {variable: a list of parents}</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.readwrite import BIFReader, BIFWriter</span>
+<span class="sd">        &gt;&gt;&gt; model = BIFReader(&quot;dog-problem.bif&quot;).get_model()</span>
+<span class="sd">        &gt;&gt;&gt; writer = BIFWriter(model)</span>
+<span class="sd">        &gt;&gt;&gt; writer.get_parents()</span>
+<span class="sd">        {&#39;bowel-problem&#39;: [],</span>
+<span class="sd">         &#39;dog-out&#39;: [&#39;bowel-problem&#39;, &#39;family-out&#39;],</span>
+<span class="sd">         &#39;family-out&#39;: [],</span>
+<span class="sd">         &#39;hear-bark&#39;: [&#39;dog-out&#39;],</span>
+<span class="sd">         &#39;light-on&#39;: [&#39;family-out&#39;]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cpds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_cpds</span><span class="p">()</span>
+        <span class="n">variable_parents</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">cpd</span> <span class="ow">in</span> <span class="n">cpds</span><span class="p">:</span>
+            <span class="n">variable_parents</span><span class="p">[</span><span class="n">cpd</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpd</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">variable_parents</span></div>
+
+
+<div class="viewcode-block" id="BIFWriter.get_cpds">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter.get_cpds">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_cpds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds tables to BIF</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict: dict of type {variable: array}</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.readwrite import BIFReader, BIFWriter</span>
+<span class="sd">        &gt;&gt;&gt; model = BIFReader(&quot;dog-problem.bif&quot;).get_model()</span>
+<span class="sd">        &gt;&gt;&gt; writer = BIFWriter(model)</span>
+<span class="sd">        &gt;&gt;&gt; writer.get_cpds()</span>
+<span class="sd">        {&#39;bowel-problem&#39;: array([ 0.01,  0.99]),</span>
+<span class="sd">         &#39;dog-out&#39;: array([ 0.99,  0.97,  0.9 ,  0.3 ,  0.01,  0.03,  0.1 ,  0.7 ]),</span>
+<span class="sd">         &#39;family-out&#39;: array([ 0.15,  0.85]),</span>
+<span class="sd">         &#39;hear-bark&#39;: array([ 0.7 ,  0.01,  0.3 ,  0.99]),</span>
+<span class="sd">         &#39;light-on&#39;: array([ 0.6 ,  0.05,  0.4 ,  0.95])}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cpds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_cpds</span><span class="p">()</span>
+        <span class="n">tables</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">cpd</span> <span class="ow">in</span> <span class="n">cpds</span><span class="p">:</span>
+            <span class="n">tables</span><span class="p">[</span><span class="n">cpd</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">compat_fns</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span>
+                <span class="n">cpd</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">decimals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">round_values</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">tables</span></div>
+
+
+<div class="viewcode-block" id="BIFWriter.write">
+<a class="viewcode-back" href="../../../readwrite/bif.html#pgmpy.readwrite.BIF.BIFWriter.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes the BIF data into a file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : Name of the file</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.utils import get_example_model</span>
+<span class="sd">        &gt;&gt;&gt; from pgmpy.readwrite import BIFReader, BIFWriter</span>
+<span class="sd">        &gt;&gt;&gt; asia = get_example_model(&quot;asia&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; writer = BIFWriter(asia)</span>
+<span class="sd">        &gt;&gt;&gt; writer.write(filename=&quot;asia.bif&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+            <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">writer</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_bif</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;The `BIFWriter.write_bif` has been deprecated. Please use `BIFWriter.write` instead.&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  <div data-ea-publisher="pgmpyorg" data-ea-type="image" data-ea-style="stickybox"></div>
+  <script>
+    (function() {
+      var nav = document.querySelector('.md-header__inner');
+      if (!nav) return;
+
+      var socialDiv = document.createElement('div');
+      socialDiv.className = 'md-header__social';
+
+      socialDiv.innerHTML =
+        '<a href="https://github.com/pgmpy/pgmpy" target="_blank" rel="noopener" title="GitHub">' +
+          '<svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">' +
+            '<path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.8-14.9-112.8-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>' +
+          '</svg>' +
+        '</a>' +
+        '<a href="https://discord.gg/DRkdKaumBs" target="_blank" rel="noopener" title="Discord">' +
+          '<svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">' +
+            '<path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91A483.689 483.689 0 0 0 116.085 69.137a1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375A487.666 487.666 0 0 0 176.02 479.918a1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126c3.082-2.309 6.166-4.711 9.109-7.137a1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233c2.944 2.426 6.027 4.851 9.132 7.16a1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352C623.729 277.594 590.933 167.465 524.531 69.836zM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239S193.056 219.1 222.491 219.1c29.665 0 53.306 26.82 52.843 59.239C275.334 310.993 251.924 337.58 222.491 337.58zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239S388.437 219.1 417.871 219.1c29.667 0 53.307 26.82 52.844 59.239C470.715 310.993 447.538 337.58 417.871 337.58z"/>' +
+          '</svg>' +
+        '</a>' +
+        '<a href="https://www.linkedin.com/company/pgmpy/" target="_blank" rel="noopener" title="LinkedIn">' +
+          '<svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">' +
+            '<path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>' +
+          '</svg>' +
+        '</a>';
+
+      nav.appendChild(socialDiv);
+    })();
+  </script>
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025, Ankur Ankan.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    9.1.0.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "search.highlight", "search.share", "toc.follow", "content.tabs.link"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike", "staticVersions": [{"aliases": [], "title": "1.0.0 (stable)", "version": "https://pgmpy.org"}, {"aliases": [], "title": "dev", "version": "https://pgmpy.org/dev"}], "versionPath": null}}</script>
+    
+      
+        <script src="../../../_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>
